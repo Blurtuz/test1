@@ -1,199 +1,101 @@
-<html>
-  <head>
-<h1 class="centered-heading">cj customs</h1>
-    
-  </head>
-  <body><div class="area"></div><nav class="main-menu"> 
-          <ul>
-                <li>
-                    <a href="https://jbfarrow.com">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                           Home
-                        </span>
-                    </a>    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-comments fa-2x"></i>
-                        <span class="nav-text">
-                            Contact me
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-camera-retro fa-2x"></i>
-                        <span class="nav-text">
-                            Gallery
-                        </span>
-                    </a>      
-                </li>
-                <li>
-                    <a href="#">
-                       <i class="fa fa-info fa-2x"></i>
-                        <span class="nav-text">
-                            About
-                        </span>
-                    </a>
-                </li>
-            </ul> 
-        </nav>
-  </body>
-    </html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cj customs</title>
+</head>
+<body>
+    <h1>cj customs</h1>
+</body>
+</html>
+
+<div class="cube">
+  <div class="face front"></div>
+  <div class="face back"></div>
+  <div class="face left"></div>
+  <div class="face right"></div>
+  <div class="face top"></div>
+  <div class="face bottom"></div>
+</div>
 
 <style>
 
-  
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-}
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-.fa-2x {
-font-size: 2em;
-}
-.fa {
-position: relative;
-display: table-cell;
-width: 60px;
-height: 36px;
-text-align: center;
-vertical-align: middle;
-font-size:20px;
-}
-
-
-.main-menu:hover,nav.main-menu.expanded {
-width:140px;
-overflow:visible;
-}
-
-.main-menu {
-background:#000000;
-border-right:1px solid #0F0F0F;
-position:absolute;
-top:0;
-bottom:0;
-height:100%;
-left:0;
-width:60px;
-overflow:hidden;
--webkit-transition:width .05s linear;
-transition:width .05s linear;
--webkit-transform:translateZ(0) scale(1,1);
-z-index:1000;
-}
-
-.main-menu>ul {
-margin:7px 0;
-}
-
-.main-menu li {
-position:relative;
-display:block;
-width:250px;
-}
-
-.main-menu li>a {
-position:relative;
-display:table;
-border-collapse:collapse;
-border-spacing:0;
-color:#999;
- font-family: arial;
-font-size: 14px;
-text-decoration:none;
--webkit-transform:translateZ(0) scale(1,1);
--webkit-transition:all .1s linear;
-transition:all .1s linear;
-  
-}
-
-.main-menu .nav-icon {
-position:relative;
-display:table-cell;
-width:60px;
-height:36px;
-text-align:center;
-vertical-align:middle;
-font-size:18px;
-}
-
-.main-menu .nav-text {
-position:relative;
-display:table-cell;
-vertical-align:middle;
-width:190px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.main-menu>ul.logout {
-position:absolute;
-left:0;
-bottom:0;
-}
-
-.no-touch .scrollable.hover {
-overflow-y:hidden;
-}
-
-.no-touch .scrollable.hover:hover {
-overflow-y:auto;
-overflow:visible;
-}
-
-a:hover,a:focus {
-text-decoration:none;
-}
-
-nav {
--webkit-user-select:none;
--moz-user-select:none;
--ms-user-select:none;
--o-user-select:none;
-user-select:none;
-}
-
-nav ul,nav li {
-outline:0;
-margin:0;
-padding:0;
-}
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-color:#fff;
-
-}
-.area {
-float: left;
-background: #e2e2e2;
-width: 100%;
-height: 100%;
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
-}
-
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body {
-    background-color: #000000;
-    color: white;
-    font-size: 50px;
-    font-weight: thin;
-    margin: 0;
-    padding: 0;
-    background-image: 
+    background: 
         linear-gradient(to right, #0F0F0F 1px, transparent 1px),
-        linear-gradient(to bottom, #0F0F0F 1px, transparent 1px);
+        linear-gradient(to bottom, #0F0F0F 1px, transparent 1px),
+        #000; /* Fallback background color */
     background-size: 50px 50px; /* Adjust the size of the grid squares */
     background-position: top left;
+    color: white;
+    font-size: 88px;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: flex-start; /* Centers vertically */
+    font-family: 'Roboto', sans-serif;
+    height: 100vh; /* Makes the body take up the full viewport height */
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
-.centered-heading {
-    text-align: center;
-    font-weight: bold;
-    margin: 20px 0; /* Adds space around the heading */
-    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, black, transparent); /* Gradient covering the whole screen */
+    pointer-events: none; /* Ensures it doesn't interfere with user interaction */
+    z-index: 1; /* Sits on top of the grid and other background elements */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+    margin-top: 150px; /* Moves the heading down */
+    position: relative;
+    z-index: 2; /* Ensures it sits above the gradient and grid */
+    background: linear-gradient(to top, grey, white); /* Gradient for the text */
+    -webkit-background-clip: text; /* Clips the gradient to the text */
+    -webkit-text-fill-color: transparent; /* Makes the text itself transparent to show the gradient */
+    background-clip: text; /* Standard background clip for text */
+    text-fill-color: transparent; /* Standard text fill color */
+}
+
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.cube {
+    position: relative;
+    width: 100px;
+    margin-top: 120px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: rotateCube 30s linear infinite;
+}
+
+.face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid white; /* Wireframe effect */
+    background: transparent;
+}
+
+.front  { transform: translateZ(50px); }
+.back   { transform: rotateY(180deg) translateZ(50px); }
+
+
+@keyframes rotateCube {
+    0%   { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
 }
