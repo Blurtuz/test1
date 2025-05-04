@@ -198,7 +198,6 @@
         /* --- Product Gallery Styles --- */
         #product-gallery {
             width: 90%;
-            /* Increased max-width for more horizontal space */
             max-width: 1600px;
             margin: 0 auto 60px auto;
             padding: 20px; position: relative; z-index: 2; text-align: center;
@@ -213,7 +212,6 @@
         }
         .product-grid {
             display: grid;
-            /* Adjusted minmax slightly, but auto-fit handles column count */
             grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
             gap: 40px;
             text-align: left;
@@ -403,39 +401,27 @@
         <div class="product-grid">
             <div class="product-card">
                 <div class="product-image-placeholder"><span>[PC Image 1 Placeholder]</span><small>(e.g., 1080p/1440p Gaming Rig)</small></div>
-                <h3>Stealth Bomber Mk III</h3>
-                <p>A balanced build optimized for high-refresh rate 1080p/1440p gaming. Features the latest gen CPU and GPU, quiet cooling, and subtle RGB accents.</p>
-                <button class="btn-details" data-pc-id="stealth-bomber">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="stealth-bomber">View Details</button>
             </div>
             <div class="product-card">
                  <div class="product-image-placeholder"><span>[PC Image 2 Placeholder]</span><small>(e.g., 4K Powerhouse)</small></div>
-                <h3>Aurora Station</h3>
-                <p>Unleash ultimate performance with this 4K-ready beast. Top-tier components, premium liquid cooling, and fully customizable RGB lighting throughout.</p>
-                 <button class="btn-details" data-pc-id="aurora-station">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="aurora-station">View Details</button>
             </div>
             <div class="product-card">
                 <div class="product-image-placeholder"><span>[PC Image 3 Placeholder]</span><small>(e.g., Compact Creator PC)</small></div>
-                <h3>Nebula Cube</h3>
-                <p>Compact form factor without compromising power. Ideal for content creators and gamers looking for a stylish, space-saving setup.</p>
-                 <button class="btn-details" data-pc-id="nebula-cube">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="nebula-cube">View Details</button>
             </div>
             <div class="product-card">
                  <div class="product-image-placeholder"><span>[PC Image 4 Placeholder]</span><small>(e.g., Entry-Level Esports)</small></div>
-                <h3>Ignition Spark</h3>
-                <p>Get competitive with this budget-friendly build designed for popular esports titles. Delivers smooth frame rates and reliable performance.</p>
-                 <button class="btn-details" data-pc-id="ignition-spark">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="ignition-spark">View Details</button>
             </div>
             <div class="product-card">
                 <div class="product-image-placeholder"><span>[PC Image 5 Placeholder]</span><small>(e.g., White RGB Showcase)</small></div>
-                <h3>Glacial Peak</h3>
-                <p>A stunning all-white build featuring premium components and brilliant, controllable RGB lighting. Perfect for showcasing your setup.</p>
-                 <button class="btn-details" data-pc-id="glacial-peak">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="glacial-peak">View Details</button>
             </div>
             <div class="product-card">
                 <div class="product-image-placeholder"><span>[PC Image 6 Placeholder]</span><small>(e.g., Workstation Build)</small></div>
-                <h3>Titan Forge</h3>
-                <p>Designed for heavy workloads like video editing, 3D rendering, and complex simulations. Maximum CPU cores and RAM capacity.</p>
-                 <button class="btn-details" data-pc-id="titan-forge">View Details</button>
+                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="titan-forge">View Details</button>
             </div>
         </div>
     </div>
@@ -473,18 +459,53 @@
         const modalContent = modalOverlay.querySelector('.modal-content');
         const closeBtn = modalOverlay.querySelector('.modal-close-btn');
         const detailButtons = document.querySelectorAll('.btn-details');
-        const pcData = { /* PC Data from previous step... */
-            'stealth-bomber': { name: 'Stealth Bomber Mk III', image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber', description: 'A balanced build optimized for high-refresh rate 1080p/1440p gaming...', specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ], benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ], fbLink: '#', jawaLink: '#' },
-            'aurora-station': { name: 'Aurora Station', image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station', description: 'Unleash ultimate performance with this 4K-ready beast...', specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ], benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ], fbLink: '#', jawaLink: '#' },
-            'nebula-cube': { name: 'Nebula Cube', image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube', description: 'Compact & powerful.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-            'ignition-spark': { name: 'Ignition Spark', image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark', description: 'Esports ready.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-            'glacial-peak': { name: 'Glacial Peak', image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak', description: 'All white showcase.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-            'titan-forge': { name: 'Titan Forge', image: 'https://placehold.co/900x506/1a237e/eee?text=Titan+Forge', description: 'Workstation powerhouse.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+        // Updated pcData with placeholder names and descriptions
+        const pcData = {
+            'stealth-bomber': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber',
+                description: 'description', // Updated
+                specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ],
+                benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ],
+                fbLink: '#', jawaLink: '#'
+            },
+            'aurora-station': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station',
+                description: 'description', // Updated
+                 specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ],
+                benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ],
+                fbLink: '#', jawaLink: '#'
+            },
+            'nebula-cube': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube',
+                description: 'description', // Updated
+                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
+            },
+            'ignition-spark': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark',
+                description: 'description', // Updated
+                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
+            },
+            'glacial-peak': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak',
+                description: 'description', // Updated
+                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
+            },
+            'titan-forge': {
+                name: '[PC Name Placeholder]', // Updated
+                image: 'https://placehold.co/900x506/1a237e/eee?text=Titan+Forge',
+                description: 'description', // Updated
+                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
+            },
          };
         function openModal(pcId) { /* Modal opening logic from previous step... */
-            const data = pcData[pcId] || pcData['stealth-bomber'];
-            modalOverlay.querySelector('#modal-pc-name').textContent = data.name;
-            modalOverlay.querySelector('#modal-description').textContent = data.description;
+            const data = pcData[pcId] || pcData['stealth-bomber']; // Fallback remains
+            modalOverlay.querySelector('#modal-pc-name').textContent = data.name; // Will now show placeholder name
+            modalOverlay.querySelector('#modal-description').textContent = data.description; // Will now show placeholder description
             const imgPlaceholder = modalOverlay.querySelector('.modal-image-placeholder');
             const existingImg = imgPlaceholder.querySelector('img');
             if (existingImg) existingImg.remove();
@@ -510,22 +531,11 @@
 
         copyBtn.addEventListener('click', () => {
             const email = copyBtn.getAttribute('data-email');
-
-            // Use the Clipboard API
             navigator.clipboard.writeText(email).then(() => {
-                // Success! Show the popup
                 copyPopup.classList.add('show');
-
-                // Hide the popup after 2 seconds
-                setTimeout(() => {
-                    copyPopup.classList.remove('show');
-                }, 2000); // 2000 milliseconds = 2 seconds
-
+                setTimeout(() => { copyPopup.classList.remove('show'); }, 2000);
             }).catch(err => {
-                // Error - might happen if not on HTTPS or localhost
                 console.error('Failed to copy email: ', err);
-                // Optionally, provide fallback feedback to the user here
-                // For example, change button text temporarily:
                 const originalText = copyBtn.textContent;
                 copyBtn.textContent = 'Error Copying!';
                 setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
