@@ -85,7 +85,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding-top: 100px;
+            padding-top: 100px; /* Keep space below banner */
             padding-bottom: 10px;
             min-height: auto;
             text-align: center;
@@ -125,9 +125,84 @@
         @keyframes rotateCube { from { transform: rotateX(0deg) rotateY(0deg); } to { transform: rotateX(360deg) rotateY(360deg); } }
         /* --- End Cube Styles --- */
 
+        /* --- Custom Build Contact Section (Moved) --- */
+        #custom-build-contact {
+            width: 90%;
+            max-width: 800px;
+            /* Adjusted margin to place between header and gallery */
+            margin: 30px auto 40px auto;
+            padding: 30px;
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            text-align: center;
+            position: relative; /* Needed for absolute positioning of popup */
+            z-index: 2;
+        }
+        #custom-build-contact h2 {
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: linear-gradient(to top, #aaa, white);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            text-fill-color: transparent; display: inline-block;
+        }
+        #custom-build-contact p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        /* Changed from .email-link to .copy-email-btn */
+        #custom-build-contact .copy-email-btn {
+            display: inline-block;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none; /* Keep for consistency, though it's a button */
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none; /* Button reset */
+            cursor: pointer; /* Indicate clickable */
+            position: relative; /* Needed for popup positioning */
+        }
+        #custom-build-contact .copy-email-btn:hover {
+            background-color: #388e3c; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+        /* Style for the "Copied!" popup message */
+        .copy-popup {
+            position: absolute;
+            bottom: 110%; /* Position above the button */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            background-color: #22c55e; /* Green background for success */
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0; /* Hidden by default */
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 10; /* Ensure it's above the button */
+        }
+        .copy-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* --- End Custom Build Contact Section --- */
+
         /* --- Product Gallery Styles --- */
         #product-gallery {
-            width: 90%; max-width: 1200px; margin: 15px auto 50px auto;
+            width: 90%; max-width: 1200px;
+            /* Adjusted margin */
+            margin: 0 auto 60px auto;
             padding: 20px; position: relative; z-index: 2; text-align: center;
         }
         #product-gallery > h2 {
@@ -160,140 +235,39 @@
         .btn-details:hover { background: linear-gradient(to right, #5cb860, #388e3c); box-shadow: 0 4px 10px rgba(0,0,0,0.4); transform: translateY(-2px); }
         /* --- End Product Gallery Styles --- */
 
-        /* --- Custom Build Contact Section --- */
-        #custom-build-contact {
-            width: 90%;
-            max-width: 800px; /* Slightly narrower max-width */
-            margin: 40px auto 60px auto; /* Spacing above and below */
-            padding: 30px;
-            background-color: rgba(26, 26, 26, 0.8); /* Consistent background */
-            border: 1px solid #333;
-            border-radius: 10px;
-            backdrop-filter: blur(3px);
-            text-align: center;
-            position: relative; /* For z-index */
-            z-index: 2;
-        }
-        #custom-build-contact h2 {
-            font-size: clamp(1.8rem, 4vw, 2.2rem); /* Responsive heading size */
-            font-weight: 700;
-            color: white;
-            margin-top: 0;
-            margin-bottom: 20px;
-            /* Optional gradient */
-            background: linear-gradient(to top, #aaa, white);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            text-fill-color: transparent; display: inline-block;
-        }
-        #custom-build-contact p {
-            color: #ccc;
-            font-size: 1.1rem; /* Slightly larger text */
-            line-height: 1.7;
-            margin-bottom: 25px;
-        }
-        #custom-build-contact .email-link {
-            display: inline-block;
-            background-color: #4CAF50; /* Green background */
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        #custom-build-contact .email-link:hover {
-            background-color: #388e3c; /* Darker green on hover */
-            transform: translateY(-2px);
-        }
-        /* --- End Custom Build Contact Section --- */
-
         /* --- Modal Styles --- */
         .modal-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            inset: 0; /* Cover full screen */
-            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent overlay */
-            z-index: 2000; /* High z-index to be on top */
-            justify-content: center;
-            align-items: center;
-            padding: 20px; /* Padding around modal */
-            overflow-y: auto; /* Allow scrolling if content overflows */
+            display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto;
         }
         .modal-content {
-            position: relative;
-            background-color: #1c1c1c; /* Dark background for modal */
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 30px;
-            width: 90%;
-            max-width: 960px; /* Max width of modal */
-            max-height: 90vh; /* Max height */
-            overflow-y: auto; /* Allow scrolling inside modal */
-            z-index: 2001;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            /* Add animation (optional) */
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative; background-color: #1c1c1c; border: 1px solid #444; border-radius: 8px;
+            padding: 30px; width: 90%; max-width: 960px; max-height: 90vh; overflow-y: auto;
+            z-index: 2001; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0; transform: scale(0.95); transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        /* Style for when modal is open */
-        .modal-overlay.active {
-            display: flex; /* Show the modal */
-        }
-        .modal-overlay.active .modal-content {
-            opacity: 1;
-            transform: scale(1);
-        }
-
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.active .modal-content { opacity: 1; transform: scale(1); }
         .modal-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #444;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2rem;
-            line-height: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            z-index: 2002;
+            position: absolute; top: 15px; right: 15px; background: #444; color: white; border: none;
+            border-radius: 50%; width: 30px; height: 30px; font-size: 1.2rem; line-height: 30px;
+            text-align: center; cursor: pointer; transition: background-color 0.3s ease; z-index: 2002;
         }
-        .modal-close-btn:hover {
-            background-color: #666;
-        }
-
-        /* Styles for content within the modal (similar to detail page) */
+        .modal-close-btn:hover { background-color: #666; }
         .modal-image-placeholder {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            max-height: 400px; /* Adjusted max height for modal */
-            background-color: #333;
-            border: 2px dashed #555;
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
+            width: 100%; aspect-ratio: 16 / 9; max-height: 400px; background-color: #333;
+            border: 2px dashed #555; border-radius: 6px; display: flex; align-items: center; justify-content: center;
             color: #888; font-size: 1.2rem; text-align: center; margin-bottom: 5px;
         }
         .modal-image-placeholder img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
         .modal-pc-name h1 {
-            font-size: clamp(1.6rem, 3vw, 2.2rem); /* Adjusted size for modal */
-            font-weight: 700; margin: 0; text-align: center; line-height: 1.2;
+            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin: 0; text-align: center; line-height: 1.2;
             background: linear-gradient(to top, #ccc, white); -webkit-background-clip: text;
-            background-clip: text; -webkit-text-fill-color: transparent; text-fill-color: transparent;
-            margin-bottom: 5px;
+            background-clip: text; -webkit-text-fill-color: transparent; text-fill-color: transparent; margin-bottom: 5px;
         }
         .modal-description p { font-size: 0.95rem; line-height: 1.6; color: #ccc; text-align: left; margin: 0; }
         .modal-info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 600px) { /* Adjust breakpoint for modal grid */
-            .modal-info-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-        }
+        @media (min-width: 600px) { .modal-info-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
         .modal-info-section h2 { font-size: 1.2rem; font-weight: 700; color: white; margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #555; padding-bottom: 6px; }
         .modal-info-section ul { list-style: none; padding: 0; margin: 0; color: #bbb; font-size: 0.9rem; line-height: 1.7; }
         .modal-info-section li { margin-bottom: 8px; display: flex; justify-content: space-between; flex-wrap: wrap; border-bottom: 1px dashed #444; padding-bottom: 5px; }
@@ -335,13 +309,13 @@
              .product-card h3 { font-size: 1.3rem; }
              .product-card p { font-size: 0.9rem; }
              .btn-details { padding: 9px 16px; font-size: 0.85rem; }
-             #custom-build-contact { padding: 25px; } /* Adjust padding on smaller screens */
+             #custom-build-contact { padding: 25px; }
              #custom-build-contact h2 { font-size: clamp(1.6rem, 5vw, 2rem); }
              #custom-build-contact p { font-size: 1rem; }
          }
          @media (max-width: 576px) {
              .product-grid { grid-template-columns: 1fr; }
-             .modal-info-grid { grid-template-columns: 1fr; } /* Stack modal grid */
+             .modal-info-grid { grid-template-columns: 1fr; }
          }
          @media (max-width: 480px) {
              .marquee-text { font-size: 1.5rem; padding-right: 30px; }
@@ -351,14 +325,14 @@
              .product-card h3 { font-size: 1.2rem; }
              .product-card p { font-size: 0.85rem; }
              .btn-details { padding: 10px 18px; width: 100%; text-align: center; font-size: 0.9rem; }
-             .modal-content { padding: 20px; } /* Less padding on small screens */
+             .modal-content { padding: 20px; }
              .modal-close-btn { top: 10px; right: 10px; }
              .modal-pc-name h1 { font-size: 1.5rem; }
              .modal-info-section h2 { font-size: 1.1rem; }
              .modal-info-section ul { font-size: 0.85rem; }
              .modal-buy-section h2 { font-size: 1.2rem; }
              .modal-buy-link { font-size: 0.9rem; padding: 8px 16px; }
-             #custom-build-contact .email-link { padding: 10px 20px; font-size: 0.95rem;}
+             #custom-build-contact .copy-email-btn { padding: 10px 20px; font-size: 0.95rem;}
          }
 
     </style>
@@ -377,6 +351,17 @@
             <div class="scene"> <div class="cube"> <div class="cube__face cube__face--front"></div> <div class="cube__face cube__face--right"></div> <div class="cube__face cube__face--back"></div> <div class="cube__face cube__face--left"></div> <div class="cube__face cube__face--top"></div> <div class="cube__face cube__face--bottom"></div> </div> </div>
         </div>
     </div>
+
+    <section id="custom-build-contact">
+        <h2>Want a Custom Build?</h2>
+        <p>
+            Don't see exactly what you're looking for? We specialize in creating tailor-made PCs to match your specific needs, budget, and aesthetic preferences. Get in touch to discuss your dream build!
+        </p>
+        <button id="copy-email-button" class="copy-email-btn" data-email="your.email@example.com">
+            Copy Email for Quote
+        </button>
+        <span id="copy-popup" class="copy-popup">Copied!</span>
+    </section>
 
     <div id="product-gallery">
         <h2>Featured Builds</h2>
@@ -420,57 +405,27 @@
         </div>
     </div>
 
-    <section id="custom-build-contact">
-        <h2>Want a Custom Build?</h2>
-        <p>
-            Don't see exactly what you're looking for? We specialize in creating tailor-made PCs to match your specific needs, budget, and aesthetic preferences. Get in touch to discuss your dream build!
-        </p>
-        <a href="mailto:cjcustoms120@gmail.com" class="email-link">Email Us for a Quote</a>
-    </section>
-
     <div id="details-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close-btn" aria-label="Close modal">&times;</button>
-
-            <div class="modal-image-placeholder">
-                 <span>[Modal PC Image Placeholder]</span>
-            </div>
-            <div class="modal-pc-name">
-                <h1 id="modal-pc-name">[PC Name Placeholder]</h1>
-            </div>
-            <div class="modal-description">
-                <p id="modal-description">
-                    [Detailed description placeholder. This would be updated by JavaScript based on the button clicked.]
-                </p>
-            </div>
+            <div class="modal-image-placeholder"><span>[Modal PC Image Placeholder]</span></div>
+            <div class="modal-pc-name"><h1 id="modal-pc-name">[PC Name Placeholder]</h1></div>
+            <div class="modal-description"><p id="modal-description">[Detailed description placeholder...]</p></div>
             <div class="modal-info-grid">
                 <div class="modal-specs modal-info-section">
                     <h2>Specifications</h2>
-                    <ul id="modal-specs-list">
-                        <li><span class="label">CPU:</span> <span class="value">[CPU Placeholder]</span></li>
-                        <li><span class="label">GPU:</span> <span class="value">[GPU Placeholder]</span></li>
-                        <li><span class="label">RAM:</span> <span class="value">[RAM Placeholder]</span></li>
-                        <li><span class="label">Storage:</span> <span class="value">[Storage Placeholder]</span></li>
-                    </ul>
+                    <ul id="modal-specs-list"><li><span class="label">CPU:</span> <span class="value">[CPU Placeholder]</span></li></ul>
                 </div>
                  <div class="modal-benchmarks modal-info-section">
                     <h2>Benchmarks</h2>
-                    <ul id="modal-benchmarks-list">
-                        <li><span class="label">Game 1 (Setting):</span> <span class="value">[FPS Placeholder] FPS</span></li>
-                        <li><span class="label">Game 2 (Setting):</span> <span class="value">[FPS Placeholder] FPS</span></li>
-                        <li><span class="label">Synthetic Test:</span> <span class="value">[Score Placeholder]</span></li>
-                    </ul>
+                    <ul id="modal-benchmarks-list"><li><span class="label">Game 1:</span> <span class="value">[FPS Placeholder] FPS</span></li></ul>
                  </div>
             </div>
              <div class="modal-buy-section">
                 <h2>Where to Buy</h2>
                 <div class="modal-buy-links">
-                    <a href="#" id="modal-fb-link" class="modal-buy-link facebook" target="_blank" rel="noopener noreferrer">
-                        View on Facebook Marketplace
-                    </a>
-                    <a href="#" id="modal-jawa-link" class="modal-buy-link jawa" target="_blank" rel="noopener noreferrer">
-                        View on Jawa.gg
-                    </a>
+                    <a href="#" id="modal-fb-link" class="modal-buy-link facebook" target="_blank" rel="noopener noreferrer">View on Facebook Marketplace</a>
+                    <a href="#" id="modal-jawa-link" class="modal-buy-link jawa" target="_blank" rel="noopener noreferrer">View on Jawa.gg</a>
                 </div>
             </div>
         </div>
@@ -478,102 +433,69 @@
 
 
     <script>
-        // Get modal elements
+        // --- Modal Functionality ---
         const modalOverlay = document.getElementById('details-modal');
         const modalContent = modalOverlay.querySelector('.modal-content');
         const closeBtn = modalOverlay.querySelector('.modal-close-btn');
         const detailButtons = document.querySelectorAll('.btn-details');
-
-        // --- Data Structure (Example - Replace with your actual data) ---
-        const pcData = {
-            'stealth-bomber': {
-                name: 'Stealth Bomber Mk III',
-                image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber', // Placeholder image URL
-                description: 'A balanced build optimized for high-refresh rate 1080p/1440p gaming. Features the latest gen CPU and GPU, quiet cooling, and subtle RGB accents.',
-                specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ],
-                benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ],
-                fbLink: '#', jawaLink: '#'
-            },
-            'aurora-station': {
-                name: 'Aurora Station',
-                image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station', // Placeholder image URL
-                description: 'Unleash ultimate performance with this 4K-ready beast. Top-tier components, premium liquid cooling, and fully customizable RGB lighting throughout.',
-                 specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ],
-                benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ],
-                fbLink: '#', jawaLink: '#'
-            },
-             'nebula-cube': { name: 'Nebula Cube', image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube', description: 'Compact & powerful.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-             'ignition-spark': { name: 'Ignition Spark', image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark', description: 'Esports ready.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-             'glacial-peak': { name: 'Glacial Peak', image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak', description: 'All white showcase.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-             'titan-forge': { name: 'Titan Forge', image: 'https://placehold.co/900x506/1a237e/eee?text=Titan+Forge', description: 'Workstation powerhouse.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
-        };
-
-        // Function to populate and open the modal
-        function openModal(pcId) {
-            const data = pcData[pcId] || pcData['stealth-bomber']; // Fallback
-
-            // Populate basic info
+        const pcData = { /* PC Data from previous step... */
+            'stealth-bomber': { name: 'Stealth Bomber Mk III', image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber', description: 'A balanced build optimized for high-refresh rate 1080p/1440p gaming...', specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ], benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ], fbLink: '#', jawaLink: '#' },
+            'aurora-station': { name: 'Aurora Station', image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station', description: 'Unleash ultimate performance with this 4K-ready beast...', specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ], benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ], fbLink: '#', jawaLink: '#' },
+            'nebula-cube': { name: 'Nebula Cube', image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube', description: 'Compact & powerful.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'ignition-spark': { name: 'Ignition Spark', image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark', description: 'Esports ready.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'glacial-peak': { name: 'Glacial Peak', image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak', description: 'All white showcase.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'titan-forge': { name: 'Titan Forge', image: 'https://placehold.co/900x506/1a237e/eee?text=Titan+Forge', description: 'Workstation powerhouse.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+         };
+        function openModal(pcId) { /* Modal opening logic from previous step... */
+            const data = pcData[pcId] || pcData['stealth-bomber'];
             modalOverlay.querySelector('#modal-pc-name').textContent = data.name;
             modalOverlay.querySelector('#modal-description').textContent = data.description;
-
-            // Populate image
             const imgPlaceholder = modalOverlay.querySelector('.modal-image-placeholder');
             const existingImg = imgPlaceholder.querySelector('img');
             if (existingImg) existingImg.remove();
-            if (data.image) {
-                const img = document.createElement('img');
-                img.src = data.image;
-                img.alt = data.name;
-                img.onerror = () => { imgPlaceholder.innerHTML = `<span>[Image not found for ${data.name}]</span>`; };
-                imgPlaceholder.innerHTML = '';
-                imgPlaceholder.appendChild(img);
-            } else { imgPlaceholder.innerHTML = `<span>[Image Placeholder for ${data.name}]</span>`; }
-
-            // Populate specs list
+            if (data.image) { const img = document.createElement('img'); img.src = data.image; img.alt = data.name; img.onerror = () => { imgPlaceholder.innerHTML = `<span>[Image not found for ${data.name}]</span>`; }; imgPlaceholder.innerHTML = ''; imgPlaceholder.appendChild(img); } else { imgPlaceholder.innerHTML = `<span>[Image Placeholder for ${data.name}]</span>`; }
             const specsList = modalOverlay.querySelector('#modal-specs-list');
-            specsList.innerHTML = '';
-            data.specs.forEach(spec => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="label">${spec.label}:</span> <span class="value">${spec.value}</span>`;
-                specsList.appendChild(li);
-            });
-             if (data.specs.length === 0) specsList.innerHTML = '<li>Specifications not available.</li>';
-
-            // Populate benchmarks list
+            specsList.innerHTML = ''; data.specs.forEach(spec => { const li = document.createElement('li'); li.innerHTML = `<span class="label">${spec.label}:</span> <span class="value">${spec.value}</span>`; specsList.appendChild(li); }); if (data.specs.length === 0) specsList.innerHTML = '<li>Specifications not available.</li>';
             const benchmarksList = modalOverlay.querySelector('#modal-benchmarks-list');
-            benchmarksList.innerHTML = '';
-            data.benchmarks.forEach(bench => {
-                 const li = document.createElement('li');
-                 li.innerHTML = `<span class="label">${bench.label}:</span> <span class="value">${bench.value}</span>`;
-                 benchmarksList.appendChild(li);
-            });
-            if (data.benchmarks.length === 0) benchmarksList.innerHTML = '<li>Benchmark data not available.</li>';
-
-            // Populate buy links
-            modalOverlay.querySelector('#modal-fb-link').href = data.fbLink || '#';
-            modalOverlay.querySelector('#modal-jawa-link').href = data.jawaLink || '#';
-
-            // Show the modal
-            modalOverlay.classList.add('active');
-            document.body.classList.add('modal-open');
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            document.body.classList.remove('modal-open');
-        }
-
-        // Add event listeners
-        detailButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const pcId = button.getAttribute('data-pc-id');
-                openModal(pcId);
-            });
-        });
+            benchmarksList.innerHTML = ''; data.benchmarks.forEach(bench => { const li = document.createElement('li'); li.innerHTML = `<span class="label">${bench.label}:</span> <span class="value">${bench.value}</span>`; benchmarksList.appendChild(li); }); if (data.benchmarks.length === 0) benchmarksList.innerHTML = '<li>Benchmark data not available.</li>';
+            modalOverlay.querySelector('#modal-fb-link').href = data.fbLink || '#'; modalOverlay.querySelector('#modal-jawa-link').href = data.jawaLink || '#';
+            modalOverlay.classList.add('active'); document.body.classList.add('modal-open');
+         }
+        function closeModal() { /* Modal closing logic from previous step... */
+            modalOverlay.classList.remove('active'); document.body.classList.remove('modal-open');
+         }
+        detailButtons.forEach(button => { button.addEventListener('click', () => { const pcId = button.getAttribute('data-pc-id'); openModal(pcId); }); });
         closeBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (event) => { if (event.target === modalOverlay) { closeModal(); } });
         document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modalOverlay.classList.contains('active')) { closeModal(); } });
+
+        // --- NEW: Email Copy Functionality ---
+        const copyBtn = document.getElementById('copy-email-button');
+        const copyPopup = document.getElementById('copy-popup');
+
+        copyBtn.addEventListener('click', () => {
+            const email = copyBtn.getAttribute('data-email');
+
+            // Use the Clipboard API
+            navigator.clipboard.writeText(email).then(() => {
+                // Success! Show the popup
+                copyPopup.classList.add('show');
+
+                // Hide the popup after 2 seconds
+                setTimeout(() => {
+                    copyPopup.classList.remove('show');
+                }, 2000); // 2000 milliseconds = 2 seconds
+
+            }).catch(err => {
+                // Error - might happen if not on HTTPS or localhost
+                console.error('Failed to copy email: ', err);
+                // Optionally, provide fallback feedback to the user here
+                // For example, change button text temporarily:
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Error Copying!';
+                setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
+            });
+        });
 
     </script>
 
