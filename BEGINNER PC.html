@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CJ Customs - New Page</title>
+    <title>CJ Customs - Product Details</title>
     <style>
-        /* Import Google Font (Optional - kept in case needed later) */
+        /* Import Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
         /* Body styling */
@@ -46,12 +46,243 @@
             z-index: -1; /* Place behind potential content but above background grid */
         }
 
-        /* --- Add styles for new page content below --- */
+        /* --- Styles for Product Detail Page --- */
+
+        .page-container {
+            width: 90%;
+            max-width: 1100px; /* Max width for content */
+            margin: 0 auto; /* Center the container */
+            padding: 50px 20px; /* Add padding top/bottom and sides */
+            position: relative; /* Ensure content is above pseudo-element */
+            z-index: 1;
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack sections vertically */
+            gap: 40px; /* Space between sections */
+        }
+
+        /* Back link styling */
+        .back-link {
+             display: inline-block;
+             color: #aaa;
+             text-decoration: none;
+             margin-bottom: 20px; /* Space below back link */
+             font-size: 0.9rem;
+             transition: color 0.3s ease;
+        }
+        .back-link:hover {
+             color: #fff;
+        }
+        .back-link::before {
+             content: '← '; /* Add left arrow */
+        }
+
+        /* Product details section layout */
+        .product-details {
+            display: grid;
+            /* Responsive grid: 1 column on small, 2 on larger */
+            grid-template-columns: 1fr; /* Default to 1 column */
+            gap: 30px;
+            align-items: start; /* Align items to the top */
+            background-color: rgba(20, 20, 20, 0.7); /* Dark semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Grid layout for larger screens */
+        @media (min-width: 768px) {
+            .product-details {
+                /* 2 columns: Image takes ~40%, Info takes ~60% */
+                grid-template-columns: 2fr 3fr;
+                gap: 40px; /* Increase gap on larger screens */
+            }
+        }
+
+        /* Main image placeholder */
+        .main-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4 / 3; /* Maintain aspect ratio */
+            background-color: #333;
+            border: 2px dashed #555;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+         /* Style for actual image if added later */
+         .main-image-placeholder img {
+             display: block;
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             border-radius: 8px;
+         }
+
+        /* Product information container */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between info elements */
+        }
+
+        /* Product Name */
+        .product-info h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+             /* Optional gradient text */
+             background: linear-gradient(to top, #ccc, white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+        }
+
+        /* Product Description */
+        .product-info .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* Specifications Section */
+        .specs {
+            margin-top: 10px;
+        }
+        .specs h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+        .specs ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .specs li {
+            margin-bottom: 8px;
+        }
+        .specs strong { /* Style the spec label (e.g., CPU:) */
+            color: #fff;
+            font-weight: 400;
+            min-width: 80px; /* Align spec values */
+            display: inline-block;
+        }
+
+        /* Where to Buy Section */
+        .buy-section {
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+        .buy-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        .buy-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between links */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .buy-link {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        /* Specific link styles */
+        .buy-link.facebook {
+            background-color: #1877F2; /* Facebook Blue */
+            color: white;
+        }
+        .buy-link.facebook:hover {
+             background-color: #115dc1;
+             transform: translateY(-2px);
+        }
+        .buy-link.jawa {
+             /* Using Jawa's typical orange/black - adjust if needed */
+            background-color: #ff6600;
+            color: black;
+        }
+         .buy-link.jawa:hover {
+             background-color: #e65c00;
+             transform: translateY(-2px);
+        }
+
 
     </style>
 </head>
 <body>
 
-    </body>
-</html>
+    <div class="page-container">
 
+        <a href="index.html" class="back-link">Back to Builds</a>
+
+        <div class="product-details">
+            <div class="main-image-placeholder">
+                <span>[Main PC Image Placeholder]</span>
+                <small>(Larger Preview)</small>
+                 </div>
+
+            <div class="product-info">
+                <h1>[PC Name Placeholder]</h1>
+                <p class="description">
+                    [Detailed description of the PC build goes here. Talk about its strengths, target use case (e.g., gaming, streaming, workstation), design philosophy, cooling solution, and any unique features. Make it compelling!]
+                </p>
+
+                <div class="specs">
+                    <h2>Specifications</h2>
+                    <ul>
+                        <li><strong>CPU:</strong> [CPU Model Placeholder, e.g., Intel Core i7-14700K or AMD Ryzen 7 7800X3D]</li>
+                        <li><strong>GPU:</strong> [GPU Model Placeholder, e.g., NVIDIA GeForce RTX 4080 Super]</li>
+                        <li><strong>RAM:</strong> [RAM Details Placeholder, e.g., 32GB DDR5 6000MHz CL30]</li>
+                        <li><strong>Storage:</strong> [Storage Details Placeholder, e.g., 2TB NVMe PCIe 4.0 SSD]</li>
+                        <li><strong>Motherboard:</strong> [Motherboard Chipset/Model Placeholder, e.g., Z790 or B650]</li>
+                        <li><strong>PSU:</strong> [PSU Wattage/Rating Placeholder, e.g., 850W 80+ Gold]</li>
+                        <li><strong>Case:</strong> [Case Model Placeholder]</li>
+                        <li><strong>Cooling:</strong> [Cooling Solution Placeholder, e.g., 240mm AIO Liquid Cooler or High-End Air Cooler]</li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="buy-section">
+            <h2>Where to Buy</h2>
+            <div class="buy-links">
+                <a href="#" class="buy-link facebook" target="_blank" rel="noopener noreferrer">
+                    View on Facebook Marketplace
+                </a>
+                <a href="#" class="buy-link jawa" target="_blank" rel="noopener noreferrer">
+                    View on Jawa.gg
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
