@@ -1,101 +1,480 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cj customs</title>
+    <title>cj customs - Custom PC Builds</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        /* Body styling */
+        body {
+            background:
+                linear-gradient(to right, #272727 1px, transparent 1px),
+                linear-gradient(to bottom, #272727 1px, transparent 1px),
+                #000; /* Fallback background color */
+            background-size: 50px 50px; /* Adjust the size of the grid squares */
+            background-attachment: fixed; /* Keep grid fixed during scroll */
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            font-weight: 300; /* Default to lighter weight */
+            margin: 0;
+            padding: 0; /* Remove default padding */
+            box-sizing: border-box; /* Apply box-sizing to body */
+            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+         /* Apply box-sizing inheritance to all elements */
+        *, *::before, *::after {
+             box-sizing: inherit;
+        }
+
+        /* Background gradient overlay - Fixed */
+        body::before { /* Changed from ::after to ::before to be behind content */
+            content: '';
+            position: fixed; /* Fixed overlay */
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, transparent 50%);
+            pointer-events: none;
+            z-index: -1; /* Place behind content but above background grid */
+        }
+
+        /* --- Animated Banner Styles --- */
+        .marquee-container {
+            position: fixed; /* Fix position at the top */
+            top: 0; /* Align to the very top */
+            left: 0;
+            width: 100%;
+            background-color: rgba(10, 10, 10, 0.6); /* Slightly darker, more transparent background */
+            backdrop-filter: blur(4px); /* Stronger blur effect */
+            overflow: hidden; /* Hide text when it moves off-screen */
+            height: 50px; /* Banner height */
+            z-index: 1000; /* Ensure banner is above other content */
+            display: flex; /* Use flexbox to align items */
+            align-items: center; /* Vertically center text */
+            border-bottom: 1px solid #444; /* Slightly more visible separator */
+        }
+
+        /* Single span containing all the text */
+        .marquee-text {
+            display: inline-block; /* Allow transform and prevent line breaks inside */
+            white-space: nowrap; /* Keep all text on one line */
+            /* Apply gradient and clip to text */
+            background: linear-gradient(to top, grey, white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            font-size: 1.8rem; /* Text size */
+            font-weight: 700; /* Bolder */
+            /* Animation */
+            animation: marquee 100s linear infinite; /* Adjust duration for speed */
+            /* Add padding-right to create space between the duplicated text blocks */
+            padding-right: 50px; /* Adjust as needed for visual spacing */
+        }
+
+        /* Keyframes for the marquee animation */
+        @keyframes marquee {
+            0%   { transform: translateX(0%); }
+            /* Move the text exactly 50% of its total width to the left.
+               This works because the text content is duplicated. */
+            100% { transform: translateX(-50%); }
+        }
+        /* --- End Animated Banner Styles --- */
+
+
+        /* Header Area (contains heading and cube) */
+        #header-area {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Vertically center */
+            position: relative;
+            padding-top: 100px; /* Reduced top padding slightly */
+            padding-bottom: 10px; /* Further reduced space below header */
+            min-height: auto; /* Let content define height */
+            text-align: center;
+            z-index: 10; /* Above gradient overlay */
+            width: 100%; /* Ensure it takes full width for centering */
+        }
+
+
+        /* Wrapper for heading */
+        #main-title {
+            position: relative; /* For positioning cube relative to this */
+            display: inline-block; /* Fit content */
+        }
+
+        /* Heading styling */
+        h1 {
+            margin: 0;
+            font-size: clamp(60px, 10vw, 120px); /* Responsive font size */
+            font-weight: 700; /* Bolder H1 */
+            background: linear-gradient(to top, grey, white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            display: inline-block; /* Fit content width */
+        }
+
+        /* --- Cube Styles --- */
+        .scene {
+            width: 70px;
+            height: 70px;
+            perspective: 450px;
+            position: absolute;
+            /* Position relative to #main-title */
+            top: 50%; /* Start vertical centering */
+            left: 100%; /* Start horizontal positioning */
+             /* Fine-tune position: Adjust these values */
+            transform: translate(20px, -50%); /* Move right & adjust vertical center */
+            margin-left: 20px; /* Keep some space */
+            z-index: 11; /* Above heading */
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s infinite linear;
+        }
+        .cube__face {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border: 2px solid white;
+            background-color: rgba(255, 255, 255, 0.05); /* Very subtle face background */
+        }
+        /* Positioning cube faces using translateZ */
+        .cube__face--front  { transform: rotateY(  0deg) translateZ(35px); }
+        .cube__face--right  { transform: rotateY( 90deg) translateZ(35px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(35px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(35px); }
+        .cube__face--top    { transform: rotateX( 90deg) translateZ(35px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(35px); }
+
+        /* Keyframes for cube rotation */
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        /* --- End Cube Styles --- */
+
+        /* --- Product Gallery Styles --- */
+        #product-gallery {
+            width: 90%; /* Limit width */
+            max-width: 1200px; /* Max width for larger screens */
+            margin: 15px auto 50px auto; /* Further reduced top margin */
+            padding: 20px;
+            position: relative; /* Needed for z-index stacking */
+            z-index: 2; /* Below header elements, above body gradient */
+            text-align: center; /* Center the heading */
+        }
+
+        /* Styling for the "Featured Builds" heading */
+        #product-gallery > h2 { /* Direct child selector */
+            font-size: clamp(2rem, 5vw, 2.8rem); /* Responsive font size */
+            font-weight: 700;
+            margin-bottom: 40px; /* Slightly reduced space below heading */
+            color: white; /* White text */
+             /* Optional: Add gradient like other headings */
+            background: linear-gradient(to top, #aaa, white); /* Slightly different gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            display: inline-block; /* To make gradient work */
+            padding-bottom: 5px; /* Space below gradient text */
+            border-bottom: 2px solid #444; /* Underline effect */
+        }
+
+        /* Grid container for product cards */
+        .product-grid {
+            display: grid;
+            /* Create responsive columns: min 300px wide, fit as many as possible */
+            /* Adjusted minmax for potentially 3 columns on wider screens */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; /* Slightly reduced gap */
+            text-align: left; /* Align text inside cards to the left */
+        }
+
+        /* Individual product card styling */
+        .product-card {
+            background-color: rgba(26, 26, 26, 0.8); /* Slightly transparent card background */
+            border: 1px solid #333;
+            border-radius: 10px; /* Slightly more rounded corners */
+            padding: 20px; /* Adjusted padding */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); /* Enhanced shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack elements vertically */
+            overflow: hidden; /* Prevent content spillover */
+            backdrop-filter: blur(3px); /* Blur background behind card */
+        }
+
+        /* Hover effect for product cards */
+        .product-card:hover {
+            transform: translateY(-8px); /* Lift card on hover */
+            box-shadow: 0 10px 30px rgba(150, 150, 150, 0.2); /* Different shadow on hover */
+        }
+
+        /* Placeholder for the product image */
+        .product-image-placeholder {
+            width: 100%;
+            height: 200px; /* Slightly reduced height */
+            background-color: #333; /* Dark background for placeholder */
+            display: flex;
+            flex-direction: column; /* Stack text */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+            color: #888; /* Grey text color */
+            font-size: 0.9rem; /* Slightly smaller text */
+            font-weight: 400; /* Regular weight */
+            margin-bottom: 15px; /* Reduced space below image */
+            border-radius: 6px; /* Rounded corners for placeholder */
+            text-align: center;
+            border: 2px dashed #555; /* Dashed border */
+        }
+         /* Error fallback for actual images (if you add them later) */
+        .product-image-placeholder img {
+             display: block;
+             width: 100%;
+             height: 100%;
+             object-fit: cover; /* Scale image nicely */
+             border-radius: 6px; /* Match placeholder radius */
+        }
+
+        /* Product name styling */
+        .product-card h3 {
+            font-size: 1.5rem; /* Adjusted name size */
+            color: white;
+            font-weight: 700; /* Bolder name */
+            margin-top: 0;
+            margin-bottom: 10px; /* Reduced space below name */
+        }
+
+        /* Product description styling */
+        .product-card p {
+            color: #ccc; /* Light grey description text */
+            font-size: 0.95rem; /* Adjusted description size */
+            line-height: 1.5; /* Adjusted line height */
+            flex-grow: 1; /* Allow description to take available space */
+            margin-bottom: 20px; /* Reduced space below description */
+            font-weight: 400; /* Regular weight */
+        }
+
+        /* "View Details" button styling */
+        .btn-details {
+            display: inline-block;
+            background: linear-gradient(to right, #4CAF50, #2E7D32); /* Green gradient button */
+            color: white;
+            padding: 10px 18px; /* Adjusted button padding */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            text-align: center;
+            font-size: 0.9rem; /* Adjusted font size */
+            font-weight: 700; /* Bolder button text */
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+            margin-top: auto; /* Push button to bottom of card */
+            align-self: flex-start; /* Align button to the left */
+            border: none; /* Remove default border */
+            cursor: pointer; /* Indicate interactivity */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Hover effect for the button */
+        .btn-details:hover {
+            background: linear-gradient(to right, #5cb860, #388e3c); /* Lighter green on hover */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transform: translateY(-2px); /* Button lift effect */
+        }
+        /* --- End Product Gallery Styles --- */
+
+         /* --- Responsive Adjustments --- */
+         @media (max-width: 992px) { /* Adjust breakpoint for 2 columns */
+             .product-grid {
+                 /* Ensure 2 columns on medium screens */
+                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             }
+         }
+
+         @media (max-width: 768px) {
+            /* Adjustments for tablets and smaller devices */
+            h1 {
+                 font-size: clamp(45px, 12vw, 80px); /* Adjust H1 size */
+            }
+            .scene {
+                 /* Adjust cube position or hide on small screens */
+                 width: 50px;
+                 height: 50px;
+                 transform: translate(10px, -50%); /* Move less to the right */
+            }
+             .cube__face {
+                 width: 50px; height: 50px; border-width: 1px;
+             }
+             /* Adjust face positions for smaller cube */
+            .cube__face--front  { transform: rotateY(  0deg) translateZ(25px); }
+            .cube__face--right  { transform: rotateY( 90deg) translateZ(25px); }
+            .cube__face--back   { transform: rotateY(180deg) translateZ(25px); }
+            .cube__face--left   { transform: rotateY(-90deg) translateZ(25px); }
+            .cube__face--top    { transform: rotateX( 90deg) translateZ(25px); }
+            .cube__face--bottom { transform: rotateX(-90deg) translateZ(25px); }
+
+             #product-gallery > h2 {
+                 font-size: clamp(1.8rem, 6vw, 2.2rem); /* Adjust section heading size */
+             }
+             /* Keep 2 columns for a bit longer if possible */
+             .product-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                 gap: 25px; /* Reduce gap */
+             }
+             .product-card {
+                 padding: 15px; /* Reduce padding */
+             }
+             .product-image-placeholder {
+                 height: 180px;
+             }
+             .product-card h3 {
+                 font-size: 1.3rem;
+             }
+             .product-card p {
+                 font-size: 0.9rem;
+             }
+             .btn-details {
+                 padding: 9px 16px;
+                 font-size: 0.85rem;
+             }
+         }
+
+         @media (max-width: 576px) { /* Adjust breakpoint for stacking */
+             /* Stack cards on smaller screens */
+             .product-grid {
+                 grid-template-columns: 1fr;
+             }
+         }
+
+         @media (max-width: 480px) {
+             /* Adjustments for mobile phones */
+             .marquee-text {
+                 font-size: 1.5rem; /* Smaller banner text */
+                 padding-right: 30px; /* Adjust spacing for smaller text */
+             }
+             #header-area {
+                 padding-top: 80px; /* Further reduce top padding */
+             }
+             .scene {
+                 display: none; /* Hide cube entirely on very small screens */
+             }
+             .product-image-placeholder {
+                 height: 160px; /* Smaller image placeholder */
+             }
+             .product-card h3 {
+                 font-size: 1.2rem; /* Smaller card title */
+             }
+             .product-card p {
+                 font-size: 0.85rem; /* Smaller card description */
+             }
+             .btn-details {
+                 padding: 10px 18px; /* Reset button padding */
+                 width: 100%; /* Make button full width */
+                 text-align: center;
+                 font-size: 0.9rem; /* Reset font size */
+             }
+         }
+
+    </style>
 </head>
 <body>
-    <h1>cj customs</h1>
-</body>
+
+    <div class="marquee-container">
+        <span class="marquee-text">
+            LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB --
+        </span>
+    </div>
+
+    <div id="header-area">
+        <div id="main-title">
+            <h1>cj customs</h1>
+            <div class="scene">
+                <div class="cube">
+                    <div class="cube__face cube__face--front"></div>
+                    <div class="cube__face cube__face--right"></div>
+                    <div class="cube__face cube__face--back"></div>
+                    <div class="cube__face cube__face--left"></div>
+                    <div class="cube__face cube__face--top"></div>
+                    <div class="cube__face cube__face--bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="product-gallery">
+        <h2>Featured Builds</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 1 Placeholder]</span>
+                    <small>(e.g., 1080p/1440p Gaming Rig)</small>
+                </div>
+                <h3>Stealth Bomber Mk III</h3>
+                <p>A balanced build optimized for high-refresh rate 1080p/1440p gaming. Features the latest gen CPU and GPU, quiet cooling, and subtle RGB accents.</p>
+                <a href="https://www.youtube.com/" class="btn-details">View Details</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 2 Placeholder]</span>
+                    <small>(e.g., 4K Powerhouse)</small>
+                </div>
+                <h3>Aurora Station</h3>
+                <p>Unleash ultimate performance with this 4K-ready beast. Top-tier components, premium liquid cooling, and fully customizable RGB lighting throughout.</p>
+                 <a href="#" class="btn-details">View Details</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 3 Placeholder]</span>
+                    <small>(e.g., Compact Creator PC)</small>
+                </div>
+                <h3>Nebula Cube</h3>
+                <p>Compact form factor without compromising power. Ideal for content creators and gamers looking for a stylish, space-saving setup.</p>
+                 <a href="#" class="btn-details">View Details</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 4 Placeholder]</span>
+                    <small>(e.g., Entry-Level Esports)</small>
+                </div>
+                <h3>Ignition Spark</h3>
+                <p>Get competitive with this budget-friendly build designed for popular esports titles. Delivers smooth frame rates and reliable performance.</p>
+                 <a href="#" class="btn-details">View Details</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 5 Placeholder]</span>
+                    <small>(e.g., White RGB Showcase)</small>
+                </div>
+                <h3>Glacial Peak</h3>
+                <p>A stunning all-white build featuring premium components and brilliant, controllable RGB lighting. Perfect for showcasing your setup.</p>
+                 <a href="#" class="btn-details">View Details</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <span>[PC Image 6 Placeholder]</span>
+                    <small>(e.g., Workstation Build)</small>
+                </div>
+                <h3>Titan Forge</h3>
+                <p>Designed for heavy workloads like video editing, 3D rendering, and complex simulations. Maximum CPU cores and RAM capacity.</p>
+                 <a href="#" class="btn-details">View Details</a>
+            </div>
+        </div>
+    </div>
+
+    </body>
 </html>
-
-<div class="cube">
-  <div class="face front"></div>
-  <div class="face back"></div>
-  <div class="face left"></div>
-  <div class="face right"></div>
-  <div class="face top"></div>
-  <div class="face bottom"></div>
-</div>
-
-<style>
-
- @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
-body {
-    background: 
-        linear-gradient(to right, #272727 1px, transparent 1px),
-        linear-gradient(to bottom, #272727 1px, transparent 1px),
-        #000; /* Fallback background color */
-    background-size: 50px 50px; /* Adjust the size of the grid squares */
-    background-position: top left;
-    color: white;
-    font-size: 88px;
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: flex-start; /* Centers vertically */
-    font-family: 'Roboto', sans-serif;
-    height: 100vh; /* Makes the body take up the full viewport height */
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, black, transparent); /* Gradient covering the whole screen */
-    pointer-events: none; /* Ensures it doesn't interfere with user interaction */
-    z-index: 1; /* Sits on top of the grid and other background elements */
-}
-
-h1 {
-    margin: 0;
-    font-size: 2em;
-    margin-top: 150px; /* Moves the heading down */
-    position: relative;
-    z-index: 2; /* Ensures it sits above the gradient and grid */
-    background: linear-gradient(to top, grey, white); /* Gradient for the text */
-    -webkit-background-clip: text; /* Clips the gradient to the text */
-    -webkit-text-fill-color: transparent; /* Makes the text itself transparent to show the gradient */
-    background-clip: text; /* Standard background clip for text */
-    text-fill-color: transparent; /* Standard text fill color */
-}
-
-body {
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-}
-
-.cube {
-    position: relative;
-    width: 100px;
-    margin-top: 120px;
-    height: 100px;
-    transform-style: preserve-3d;
-    animation: rotateCube 30s linear infinite;
-}
-
-.face {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 2px solid white; /* Wireframe effect */
-    background: transparent;
-}
-
-.front  { transform: translateZ(50px); }
-.back   { transform: rotateY(180deg) translateZ(50px); }
-
-
-@keyframes rotateCube {
-    0%   { transform: rotateX(0deg) rotateY(0deg); }
-    100% { transform: rotateX(360deg) rotateY(360deg); }
-}
