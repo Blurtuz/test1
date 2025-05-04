@@ -152,7 +152,6 @@
         .product-card h3 { font-size: 1.5rem; color: white; font-weight: 700; margin-top: 0; margin-bottom: 10px; }
         .product-card p { color: #ccc; font-size: 0.95rem; line-height: 1.5; flex-grow: 1; margin-bottom: 20px; font-weight: 400; }
         .btn-details {
-            /* Changed from <a> to <button> for non-navigation action */
             display: inline-block; background: linear-gradient(to right, #4CAF50, #2E7D32); color: white;
             padding: 10px 18px; text-decoration: none; border-radius: 5px; text-align: center;
             font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; margin-top: auto;
@@ -160,6 +159,54 @@
         }
         .btn-details:hover { background: linear-gradient(to right, #5cb860, #388e3c); box-shadow: 0 4px 10px rgba(0,0,0,0.4); transform: translateY(-2px); }
         /* --- End Product Gallery Styles --- */
+
+        /* --- Custom Build Contact Section --- */
+        #custom-build-contact {
+            width: 90%;
+            max-width: 800px; /* Slightly narrower max-width */
+            margin: 40px auto 60px auto; /* Spacing above and below */
+            padding: 30px;
+            background-color: rgba(26, 26, 26, 0.8); /* Consistent background */
+            border: 1px solid #333;
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            text-align: center;
+            position: relative; /* For z-index */
+            z-index: 2;
+        }
+        #custom-build-contact h2 {
+            font-size: clamp(1.8rem, 4vw, 2.2rem); /* Responsive heading size */
+            font-weight: 700;
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+            /* Optional gradient */
+            background: linear-gradient(to top, #aaa, white);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            text-fill-color: transparent; display: inline-block;
+        }
+        #custom-build-contact p {
+            color: #ccc;
+            font-size: 1.1rem; /* Slightly larger text */
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        #custom-build-contact .email-link {
+            display: inline-block;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #custom-build-contact .email-link:hover {
+            background-color: #388e3c; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+        /* --- End Custom Build Contact Section --- */
 
         /* --- Modal Styles --- */
         .modal-overlay {
@@ -288,6 +335,9 @@
              .product-card h3 { font-size: 1.3rem; }
              .product-card p { font-size: 0.9rem; }
              .btn-details { padding: 9px 16px; font-size: 0.85rem; }
+             #custom-build-contact { padding: 25px; } /* Adjust padding on smaller screens */
+             #custom-build-contact h2 { font-size: clamp(1.6rem, 5vw, 2rem); }
+             #custom-build-contact p { font-size: 1rem; }
          }
          @media (max-width: 576px) {
              .product-grid { grid-template-columns: 1fr; }
@@ -308,6 +358,7 @@
              .modal-info-section ul { font-size: 0.85rem; }
              .modal-buy-section h2 { font-size: 1.2rem; }
              .modal-buy-link { font-size: 0.9rem; padding: 8px 16px; }
+             #custom-build-contact .email-link { padding: 10px 20px; font-size: 0.95rem;}
          }
 
     </style>
@@ -369,24 +420,29 @@
         </div>
     </div>
 
+    <section id="custom-build-contact">
+        <h2>Want a Custom Build?</h2>
+        <p>
+            Don't see exactly what you're looking for? We specialize in creating tailor-made PCs to match your specific needs, budget, and aesthetic preferences. Get in touch to discuss your dream build!
+        </p>
+        <a href="mailto:cjcustoms120@gmail.com" class="email-link">Email Us for a Quote</a>
+    </section>
+
     <div id="details-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close-btn" aria-label="Close modal">&times;</button>
 
             <div class="modal-image-placeholder">
                  <span>[Modal PC Image Placeholder]</span>
-                 </div>
-
+            </div>
             <div class="modal-pc-name">
                 <h1 id="modal-pc-name">[PC Name Placeholder]</h1>
             </div>
-
             <div class="modal-description">
                 <p id="modal-description">
                     [Detailed description placeholder. This would be updated by JavaScript based on the button clicked.]
                 </p>
             </div>
-
             <div class="modal-info-grid">
                 <div class="modal-specs modal-info-section">
                     <h2>Specifications</h2>
@@ -395,7 +451,7 @@
                         <li><span class="label">GPU:</span> <span class="value">[GPU Placeholder]</span></li>
                         <li><span class="label">RAM:</span> <span class="value">[RAM Placeholder]</span></li>
                         <li><span class="label">Storage:</span> <span class="value">[Storage Placeholder]</span></li>
-                        </ul>
+                    </ul>
                 </div>
                  <div class="modal-benchmarks modal-info-section">
                     <h2>Benchmarks</h2>
@@ -403,10 +459,9 @@
                         <li><span class="label">Game 1 (Setting):</span> <span class="value">[FPS Placeholder] FPS</span></li>
                         <li><span class="label">Game 2 (Setting):</span> <span class="value">[FPS Placeholder] FPS</span></li>
                         <li><span class="label">Synthetic Test:</span> <span class="value">[Score Placeholder]</span></li>
-                        </ul>
+                    </ul>
                  </div>
             </div>
-
              <div class="modal-buy-section">
                 <h2>Where to Buy</h2>
                 <div class="modal-buy-links">
@@ -430,45 +485,23 @@
         const detailButtons = document.querySelectorAll('.btn-details');
 
         // --- Data Structure (Example - Replace with your actual data) ---
-        // In a real application, this data might come from a server or be embedded differently
         const pcData = {
             'stealth-bomber': {
                 name: 'Stealth Bomber Mk III',
                 image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber', // Placeholder image URL
                 description: 'A balanced build optimized for high-refresh rate 1080p/1440p gaming. Features the latest gen CPU and GPU, quiet cooling, and subtle RGB accents.',
-                specs: [
-                    { label: 'CPU', value: 'Intel Core i5-14600K' },
-                    { label: 'GPU', value: 'NVIDIA RTX 4070' },
-                    { label: 'RAM', value: '32GB DDR5 6000MHz' },
-                    { label: 'Storage', value: '1TB NVMe SSD' },
-                    { label: 'Case', value: 'Mid-Tower ATX Black' }
-                ],
-                benchmarks: [
-                    { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' },
-                    { label: 'Warzone (1440p, Competitive)', value: '150 FPS' }
-                ],
-                fbLink: '#', // Replace with actual FB link
-                jawaLink: '#' // Replace with actual Jawa link
+                specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ],
+                benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ],
+                fbLink: '#', jawaLink: '#'
             },
             'aurora-station': {
                 name: 'Aurora Station',
                 image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station', // Placeholder image URL
                 description: 'Unleash ultimate performance with this 4K-ready beast. Top-tier components, premium liquid cooling, and fully customizable RGB lighting throughout.',
-                 specs: [
-                    { label: 'CPU', value: 'AMD Ryzen 9 7950X' },
-                    { label: 'GPU', value: 'NVIDIA RTX 4090' },
-                    { label: 'RAM', value: '64GB DDR5 6400MHz' },
-                    { label: 'Storage', value: '4TB NVMe Gen4 SSD' },
-                    { label: 'Cooling', value: '360mm AIO Cooler' }
-                ],
-                benchmarks: [
-                    { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' },
-                    { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' }
-                ],
-                fbLink: '#',
-                jawaLink: '#'
+                 specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ],
+                benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ],
+                fbLink: '#', jawaLink: '#'
             },
-            // Add data for other PCs (nebula-cube, ignition-spark, glacial-peak, titan-forge) here...
              'nebula-cube': { name: 'Nebula Cube', image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube', description: 'Compact & powerful.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
              'ignition-spark': { name: 'Ignition Spark', image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark', description: 'Esports ready.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
              'glacial-peak': { name: 'Glacial Peak', image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak', description: 'All white showcase.', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
@@ -477,33 +510,28 @@
 
         // Function to populate and open the modal
         function openModal(pcId) {
-            const data = pcData[pcId] || pcData['stealth-bomber']; // Fallback to default if ID not found
+            const data = pcData[pcId] || pcData['stealth-bomber']; // Fallback
 
             // Populate basic info
             modalOverlay.querySelector('#modal-pc-name').textContent = data.name;
             modalOverlay.querySelector('#modal-description').textContent = data.description;
 
-            // Populate image (handle potential missing image)
+            // Populate image
             const imgPlaceholder = modalOverlay.querySelector('.modal-image-placeholder');
             const existingImg = imgPlaceholder.querySelector('img');
-            if (existingImg) existingImg.remove(); // Remove old image if exists
+            if (existingImg) existingImg.remove();
             if (data.image) {
                 const img = document.createElement('img');
                 img.src = data.image;
                 img.alt = data.name;
-                img.onerror = () => { // Basic error handling for image
-                    imgPlaceholder.innerHTML = `<span>[Image not found for ${data.name}]</span>`;
-                };
-                imgPlaceholder.innerHTML = ''; // Clear placeholder text
+                img.onerror = () => { imgPlaceholder.innerHTML = `<span>[Image not found for ${data.name}]</span>`; };
+                imgPlaceholder.innerHTML = '';
                 imgPlaceholder.appendChild(img);
-            } else {
-                 imgPlaceholder.innerHTML = `<span>[Image Placeholder for ${data.name}]</span>`;
-            }
-
+            } else { imgPlaceholder.innerHTML = `<span>[Image Placeholder for ${data.name}]</span>`; }
 
             // Populate specs list
             const specsList = modalOverlay.querySelector('#modal-specs-list');
-            specsList.innerHTML = ''; // Clear previous specs
+            specsList.innerHTML = '';
             data.specs.forEach(spec => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span class="label">${spec.label}:</span> <span class="value">${spec.value}</span>`;
@@ -511,10 +539,9 @@
             });
              if (data.specs.length === 0) specsList.innerHTML = '<li>Specifications not available.</li>';
 
-
             // Populate benchmarks list
             const benchmarksList = modalOverlay.querySelector('#modal-benchmarks-list');
-            benchmarksList.innerHTML = ''; // Clear previous benchmarks
+            benchmarksList.innerHTML = '';
             data.benchmarks.forEach(bench => {
                  const li = document.createElement('li');
                  li.innerHTML = `<span class="label">${bench.label}:</span> <span class="value">${bench.value}</span>`;
@@ -522,15 +549,13 @@
             });
             if (data.benchmarks.length === 0) benchmarksList.innerHTML = '<li>Benchmark data not available.</li>';
 
-
             // Populate buy links
             modalOverlay.querySelector('#modal-fb-link').href = data.fbLink || '#';
             modalOverlay.querySelector('#modal-jawa-link').href = data.jawaLink || '#';
 
-
             // Show the modal
             modalOverlay.classList.add('active');
-            document.body.classList.add('modal-open'); // Prevent background scroll
+            document.body.classList.add('modal-open');
         }
 
         // Function to close the modal
@@ -539,31 +564,16 @@
             document.body.classList.remove('modal-open');
         }
 
-        // Add event listeners to all "View Details" buttons
+        // Add event listeners
         detailButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const pcId = button.getAttribute('data-pc-id');
                 openModal(pcId);
             });
         });
-
-        // Add event listener to close button
         closeBtn.addEventListener('click', closeModal);
-
-        // Add event listener to overlay background (closes modal when clicking outside content)
-        modalOverlay.addEventListener('click', (event) => {
-            // Check if the click was directly on the overlay, not the content inside
-            if (event.target === modalOverlay) {
-                closeModal();
-            }
-        });
-
-         // Close modal on Escape key press
-         document.addEventListener('keydown', (event) => {
-             if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
-                 closeModal();
-             }
-         });
+        modalOverlay.addEventListener('click', (event) => { if (event.target === modalOverlay) { closeModal(); } });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modalOverlay.classList.contains('active')) { closeModal(); } });
 
     </script>
 
