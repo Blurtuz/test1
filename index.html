@@ -130,7 +130,6 @@
             width: 90%;
             max-width: 800px;
             /* Adjusted margin to place between header and gallery */
-            /* Increased top margin from 50px to 60px */
             margin: 60px auto 40px auto;
             padding: 30px;
             background-color: rgba(26, 26, 26, 0.8);
@@ -179,7 +178,8 @@
         /* Style for the "Copied!" popup message */
         .copy-popup {
             position: absolute;
-            bottom: 110%; /* Position above the button */
+            /* Adjusted bottom position to be closer */
+            bottom: calc(100% + 4px); /* Position 4px above the button */
             left: 50%;
             transform: translateX(-50%); /* Center horizontally */
             background-color: #22c55e; /* Green background for success */
