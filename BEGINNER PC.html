@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CJ Customs - Product Details</title>
+    <title>CJ Customs - Product Details (Layout 3)</title>
     <style>
         /* Import Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
@@ -46,18 +46,16 @@
             z-index: -1; /* Place behind potential content but above background grid */
         }
 
-        /* --- Styles for Product Detail Page --- */
+        /* --- Styles for New Layout --- */
 
-        .page-container {
+        /* Container for top elements like back link */
+        .top-bar {
             width: 90%;
-            max-width: 1100px; /* Max width for content */
-            margin: 0 auto; /* Center the container */
-            padding: 50px 20px; /* Add padding top/bottom and sides */
-            position: relative; /* Ensure content is above pseudo-element */
-            z-index: 1;
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Stack sections vertically */
-            gap: 40px; /* Space between sections */
+            max-width: 1100px; /* Adjusted max width slightly */
+            margin: 0 auto;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
         }
 
         /* Back link styling */
@@ -65,8 +63,7 @@
              display: inline-block;
              color: #aaa;
              text-decoration: none;
-             margin-bottom: 20px; /* Space below back link */
-             font-size: 0.9rem;
+             font-size: 1rem;
              transition: color 0.3s ease;
         }
         .back-link:hover {
@@ -76,140 +73,164 @@
              content: '← '; /* Add left arrow */
         }
 
-        /* Product details section layout */
-        .product-details {
-            display: grid;
-            /* Responsive grid: 1 column on small, 2 on larger */
-            grid-template-columns: 1fr; /* Default to 1 column */
-            gap: 30px;
-            align-items: start; /* Align items to the top */
-            background-color: rgba(20, 20, 20, 0.7); /* Dark semi-transparent background */
+        /* Main Content Area */
+        .main-content-area {
+            width: 90%;
+            max-width: 1100px; /* Max width for content */
+            margin: 20px auto 40px auto; /* Adjusted top margin, centering */
             padding: 30px;
+            background-color: rgba(20, 20, 20, 0.75); /* Slightly less transparent */
             border-radius: 10px;
             border: 1px solid #333;
             backdrop-filter: blur(5px);
-        }
-
-        /* Grid layout for larger screens */
-        @media (min-width: 768px) {
-            .product-details {
-                /* 2 columns: Image takes ~40%, Info takes ~60% */
-                grid-template-columns: 2fr 3fr;
-                gap: 40px; /* Increase gap on larger screens */
-            }
-        }
-
-        /* Main image placeholder */
-        .main-image-placeholder {
-            width: 100%;
-            aspect-ratio: 4 / 3; /* Maintain aspect ratio */
-            background-color: #333;
-            border: 2px dashed #555;
-            border-radius: 8px;
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
+            gap: 30px; /* Adjusted gap between elements inside */
+        }
+
+        /* Product Image Placeholder (Now inside main content) */
+        .product-image-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Common aspect ratio for main images */
+            max-height: 550px; /* Limit maximum height */
+            background-color: #333;
+            border: 2px dashed #555;
+            border-radius: 8px; /* Rounded corners */
+            display: flex;
             align-items: center;
             justify-content: center;
             color: #888;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             text-align: center;
+            margin-bottom: 10px; /* Space below image */
         }
-         /* Style for actual image if added later */
-         .main-image-placeholder img {
-             display: block;
-             width: 100%;
-             height: 100%;
-             object-fit: cover;
-             border-radius: 8px;
-         }
-
-        /* Product information container */
-        .product-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Space between info elements */
+        .product-image-placeholder img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area */
+            border-radius: 8px;
         }
 
-        /* Product Name */
-        .product-info h1 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+        /* PC Name */
+        .pc-name h1 {
+            font-size: clamp(2.2rem, 5vw, 3rem); /* Larger name */
             font-weight: 700;
             margin: 0;
+            text-align: center;
             line-height: 1.2;
-             /* Optional gradient text */
-             background: linear-gradient(to top, #ccc, white);
+            background: linear-gradient(to top, #ccc, white);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-fill-color: transparent;
+            margin-bottom: 10px; /* Space below name */
         }
 
-        /* Product Description */
-        .product-info .description {
-            font-size: 1rem;
-            line-height: 1.6;
+        /* Description */
+        .description p {
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: #ccc;
+            text-align: left;
+            margin: 0;
         }
 
-        /* Specifications Section */
-        .specs {
-            margin-top: 10px;
+        /* Grid for Specs and Benchmarks */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to 1 column */
+            gap: 30px; /* Gap between specs and benchmarks */
         }
-        .specs h2 {
-            font-size: 1.3rem;
+
+        @media (min-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr; /* 2 columns side-by-side */
+                gap: 50px;
+            }
+        }
+
+        /* Section styling (shared by specs and benchmarks) */
+        .info-section {
+             /* No extra margin needed due to parent gap */
+        }
+        .info-section h2 {
+            font-size: 1.5rem; /* Larger section titles */
             font-weight: 700;
             color: white;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 5px;
+            margin-top: 0; /* Reset top margin */
+            margin-bottom: 20px;
+            border-bottom: 1px solid #555; /* Slightly bolder border */
+            padding-bottom: 10px;
         }
-        .specs ul {
+        .info-section ul {
             list-style: none;
             padding: 0;
             margin: 0;
             color: #bbb;
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.8;
         }
-        .specs li {
-            margin-bottom: 8px;
+        .info-section li {
+            margin-bottom: 12px; /* More space between items */
+            display: flex; /* Use flex for alignment */
+            justify-content: space-between; /* Push label and value apart */
+            flex-wrap: wrap; /* Allow wrapping if needed */
+            border-bottom: 1px dashed #444; /* Subtle separator */
+            padding-bottom: 8px;
         }
-        .specs strong { /* Style the spec label (e.g., CPU:) */
+        .info-section li:last-child {
+            border-bottom: none; /* Remove border on last item */
+        }
+
+        /* Spec/Benchmark Label */
+        .info-section .label {
             color: #fff;
             font-weight: 400;
-            min-width: 80px; /* Align spec values */
-            display: inline-block;
+            margin-right: 15px; /* Space after label */
+            flex-shrink: 0; /* Prevent label from shrinking */
         }
+         /* Spec/Benchmark Value */
+        .info-section .value {
+            color: #4CAF50; /* Green color for results/values */
+            font-weight: 700;
+            text-align: right; /* Align value to the right */
+        }
+        /* Specific styling for spec values if needed */
+        .specs .value {
+            color: #ddd; /* Slightly different color for specs */
+            font-weight: 400;
+        }
+
 
         /* Where to Buy Section */
         .buy-section {
-            background-color: rgba(20, 20, 20, 0.7);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            backdrop-filter: blur(5px);
+            /* Removed background/border - now part of main content area */
             text-align: center;
+            margin-top: 20px; /* Add some space above */
         }
         .buy-section h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: white;
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .buy-links {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Space between links */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 25px;
+            flex-wrap: wrap;
         }
         .buy-link {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 14px 28px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.05rem;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
@@ -233,40 +254,55 @@
              transform: translateY(-2px);
         }
 
-
     </style>
 </head>
 <body>
 
-    <div class="page-container">
-
+    <div class="top-bar">
         <a href="index.html" class="back-link">Back to Builds</a>
+    </div>
 
-        <div class="product-details">
-            <div class="main-image-placeholder">
-                <span>[Main PC Image Placeholder]</span>
-                <small>(Larger Preview)</small>
-                 </div>
+    <div class="main-content-area">
 
-            <div class="product-info">
-                <h1>[PC Name Placeholder]</h1>
-                <p class="description">
-                    [Detailed description of the PC build goes here. Talk about its strengths, target use case (e.g., gaming, streaming, workstation), design philosophy, cooling solution, and any unique features. Make it compelling!]
-                </p>
+        <div class="product-image-placeholder">
+            <span>[Main PC Image Placeholder]</span>
+            </div>
 
-                <div class="specs">
-                    <h2>Specifications</h2>
-                    <ul>
-                        <li><strong>CPU:</strong> [CPU Model Placeholder, e.g., Intel Core i7-14700K or AMD Ryzen 7 7800X3D]</li>
-                        <li><strong>GPU:</strong> [GPU Model Placeholder, e.g., NVIDIA GeForce RTX 4080 Super]</li>
-                        <li><strong>RAM:</strong> [RAM Details Placeholder, e.g., 32GB DDR5 6000MHz CL30]</li>
-                        <li><strong>Storage:</strong> [Storage Details Placeholder, e.g., 2TB NVMe PCIe 4.0 SSD]</li>
-                        <li><strong>Motherboard:</strong> [Motherboard Chipset/Model Placeholder, e.g., Z790 or B650]</li>
-                        <li><strong>PSU:</strong> [PSU Wattage/Rating Placeholder, e.g., 850W 80+ Gold]</li>
-                        <li><strong>Case:</strong> [Case Model Placeholder]</li>
-                        <li><strong>Cooling:</strong> [Cooling Solution Placeholder, e.g., 240mm AIO Liquid Cooler or High-End Air Cooler]</li>
-                        </ul>
-                </div>
+        <div class="pc-name">
+            <h1>[PC Name Placeholder]</h1>
+        </div>
+
+        <div class="description">
+            <p>
+                [Detailed description of the PC build goes here. Talk about its strengths, target use case (e.g., gaming, streaming, workstation), design philosophy, cooling solution, and any unique features. Make it compelling!]
+            </p>
+        </div>
+
+        <div class="info-grid">
+            <div class="specs info-section">
+                <h2>Specifications</h2>
+                <ul>
+                    <li><span class="label">CPU:</span> <span class="value">[CPU Model Placeholder]</span></li>
+                    <li><span class="label">GPU:</span> <span class="value">[GPU Model Placeholder]</span></li>
+                    <li><span class="label">RAM:</span> <span class="value">[RAM Details Placeholder]</span></li>
+                    <li><span class="label">Storage:</span> <span class="value">[Storage Details Placeholder]</span></li>
+                    <li><span class="label">Motherboard:</span> <span class="value">[Motherboard Placeholder]</span></li>
+                    <li><span class="label">PSU:</span> <span class="value">[PSU Placeholder]</span></li>
+                    <li><span class="label">Case:</span> <span class="value">[Case Model Placeholder]</span></li>
+                    <li><span class="label">Cooling:</span> <span class="value">[Cooling Solution Placeholder]</span></li>
+                    </ul>
+            </div>
+
+            <div class="benchmarks info-section">
+                <h2>Benchmarks</h2>
+                <ul>
+                    <li><span class="label">Cyberpunk 2077 (1440p, Ultra):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
+                    <li><span class="label">Call of Duty: Warzone (1440p, High):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
+                    <li><span class="label">Fortnite (1080p, Competitive):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
+                    <li><span class="label">Cinebench R23 (Multi-Core):</span> <span class="value">[Score Placeholder]</span></li>
+                    <li><span class="label">3DMark Time Spy (GPU Score):</span> <span class="value">[Score Placeholder]</span></li>
+                    </ul>
+                <small style="color: #888; display: block; margin-top: 15px; text-align: center;">(Benchmark results are indicative and may vary based on drivers, game updates, and specific settings.)</small>
             </div>
         </div>
 
@@ -282,7 +318,5 @@
             </div>
         </div>
 
-    </div>
-
-</body>
+    </div> </body>
 </html>
