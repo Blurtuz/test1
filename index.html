@@ -98,8 +98,10 @@
             opacity: 1;
             visibility: visible;
         }
-        /* Removed glow from contact section as it's now integrated */
-        /* #custom-build-contact { box-shadow: 0 0 40px rgba(99, 102, 241, 0.2); } */
+        /* Glow effect for contact section */
+        #custom-build-contact {
+             box-shadow: 0 0 40px rgba(99, 102, 241, 0.2); /* Added subtle indigo glow */
+        }
 
     </style>
 </head>
@@ -111,7 +113,8 @@
              <div class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#product-gallery" class="text-gray-300 hover:text-white transition duration-200">Featured Builds</a>
                 <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-200">Why Choose Us</a>
-                <a href="#custom-build-contact-form" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a> </div>
+                <a href="#custom-build-contact" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a>
+            </div>
             <div class="md:hidden"> <button class="text-gray-300 hover:text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
@@ -119,26 +122,26 @@
         </div>
     </nav>
 
-    <section class="relative text-center overflow-hidden pattern-bg py-24 sm:py-32"> <div class="absolute inset-0 opacity-15 blur-3xl">
-             <div class="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-gradient-radial from-indigo-800 via-purple-800 to-transparent rounded-full"></div>
-        </div>
-        <div class="container mx-auto px-4 relative z-10 max-w-4xl"> <h1 class="text-[6rem] sm:text-[8rem] md:text-[10rem] lg:text-[12rem] font-black tracking-tighter mb-6 leading-none">
-                <span class="gradient-text">cj customs</span>
-            </h1>
-            <p class="text-lg sm:text-xl lg:text-2xl text-gray-400 font-light mb-10 max-w-2xl mx-auto"> Engineered Performance. Built For You.
-            </p>
-
-            <div id="custom-build-contact-form" class="bg-transparent p-6 rounded-lg text-center relative max-w-xl mx-auto"> <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2>
-                 <p class="text-gray-300 mb-6 text-base sm:text-lg">
-                     Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
-                 </p>
-                 <div class="relative inline-block">
-                     <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-base sm:text-lg" data-email="cjcustoms120@gmail.com">
-                         Copy Email for Quote
-                     </button>
-                     <span id="copy-popup" class="copy-popup">Copied!</span>
-                 </div>
-             </div>
+    <section class="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden pattern-bg pt-10 pb-16">
+        <div class="container mx-auto px-4 z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-[6rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] xl:text-[11rem] font-black tracking-tighter mb-5 leading-none whitespace-nowrap"> <span class="gradient-text">cj customs</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-400 font-light max-w-md mx-auto md:mx-0">
+                        Engineered Performance. Built For You.
+                    </p>
+                </div>
+                <div id="custom-build-contact" class="bg-gray-900/70 backdrop-blur-md p-8 sm:p-10 rounded-lg border border-gray-700 text-center relative shadow-lg">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-5 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2> <p class="text-gray-300 mb-8 text-lg sm:text-xl"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
+                    </p>
+                    <div class="relative inline-block">
+                        <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3.5 px-10 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-lg sm:text-xl" data-email="cjcustoms120@gmail.com"> Copy Email for Quote
+                        </button>
+                        <span id="copy-popup" class="copy-popup">Copied!</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
