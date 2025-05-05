@@ -3,179 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cj customs - Custom PC Builds</title>
+    <title>cj customs - Elite Custom PCs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Import Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
-        /* Body styling */
+        /* Base styling */
         body {
-            background:
-                linear-gradient(to right, #272727 1px, transparent 1px),
-                linear-gradient(to bottom, #272727 1px, transparent 1px),
-                #000;
-            background-size: 50px 50px;
-            background-attachment: fixed;
-            color: white;
-            font-family: 'Roboto', sans-serif;
-            min-height: 100vh;
-            font-weight: 300;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            position: relative;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0f; /* Very dark base */
+            color: #d1d5db; /* gray-300 */
         }
-        body.modal-open {
-            overflow: hidden; /* Prevent background scrolling when modal is open */
-        }
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar { width: 6px; }
+        .modal-content::-webkit-scrollbar-track { background: #1f2937; border-radius: 10px; } /* gray-800 */
+        .modal-content::-webkit-scrollbar-thumb { background-color: #4f46e5; border-radius: 10px; } /* indigo-600 */
+        .modal-content { scrollbar-width: thin; scrollbar-color: #4f46e5 #1f2937; }
 
-         /* Apply box-sizing inheritance */
-        *, *::before, *::after {
-             box-sizing: inherit;
-        }
+        /* Marquee Animation */
+        .marquee-text-wrapper { animation: marquee 90s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
-        /* Background gradient overlay */
-        body::before {
-            content: '';
+        /* Modal overlay fixed position and centering */
+        .modal-overlay {
             position: fixed;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+            display: flex; /* Use flex for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
+        /* Prevent layout shift when scrollbar disappears */
+        body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); }
 
-        /* --- Animated Banner Styles --- */
-        .marquee-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(4px);
-            overflow: hidden;
-            height: 50px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #444;
-        }
-        .marquee-text {
-            display: inline-block;
-            white-space: nowrap;
-            background: linear-gradient(to top, grey, white);
+        /* Gradient text helper - Updated for main title */
+        .gradient-text-main-title {
+             background-image: linear-gradient(to right, #60a5fa, #22d3ee, #3b82f6); /* blue-400, cyan-400, blue-500 */
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-            font-size: 1.8rem;
-            font-weight: 700;
-            animation: marquee 100s linear infinite;
-            padding-right: 50px;
+            color: transparent;
         }
-        @keyframes marquee {
-            0%   { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
+         .gradient-text-sub {
+            background-image: linear-gradient(to right, #6366f1, #a78bfa); /* indigo-500 to violet-400 */
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-        /* --- End Animated Banner Styles --- */
-
-        /* Header Area */
-        #header-area {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding-top: 100px; /* Keep space below banner */
-            padding-bottom: 10px;
-            min-height: auto;
-            text-align: center;
-            z-index: 10;
-            width: 100%;
+        /* Button gradient */
+        .btn-gradient {
+             background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* indigo-500 to purple-500 */
         }
-        #main-title {
-            position: relative;
-            display: inline-block;
-        }
-        h1 {
-            margin: 0;
-            font-size: clamp(60px, 10vw, 120px);
-            font-weight: 700;
-            background: linear-gradient(to top, grey, white);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            display: inline-block;
+        .btn-gradient:hover {
+             background-image: linear-gradient(to right, #4f46e5, #7c3aed); /* indigo-600 to purple-600 */
         }
 
-        /* --- Cube Styles --- */
-        .scene {
-            width: 70px; height: 70px; perspective: 450px; position: absolute;
-            top: 50%; left: 100%; transform: translate(20px, -50%);
-            margin-left: 20px; z-index: 11;
+        /* Subtle glow effect on hover for cards */
+        .card-hover-effect:hover {
+            border-color: #6366f1; /* indigo-500 */
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+            transform: translateY(-4px); /* Slight lift */
         }
-        .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: rotateCube 10s infinite linear; }
-        .cube__face { position: absolute; width: 70px; height: 70px; border: 2px solid white; background-color: rgba(255, 255, 255, 0.05); }
-        .cube__face--front  { transform: rotateY(  0deg) translateZ(35px); }
-        .cube__face--right  { transform: rotateY( 90deg) translateZ(35px); }
-        .cube__face--back   { transform: rotateY(180deg) translateZ(35px); }
-        .cube__face--left   { transform: rotateY(-90deg) translateZ(35px); }
-        .cube__face--top    { transform: rotateX( 90deg) translateZ(35px); }
-        .cube__face--bottom { transform: rotateX(-90deg) translateZ(35px); }
-        @keyframes rotateCube { from { transform: rotateX(0deg) rotateY(0deg); } to { transform: rotateX(360deg) rotateY(360deg); } }
-        /* --- End Cube Styles --- */
-
-        /* --- Custom Build Contact Section (Moved) --- */
-        #custom-build-contact {
-            width: 90%;
-            max-width: 800px;
-            margin: 60px auto 40px auto;
-            padding: 30px;
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 1px solid #333;
-            border-radius: 10px;
-            backdrop-filter: blur(3px);
-            text-align: center;
-            position: relative; /* Needed for absolute positioning of popup */
-            z-index: 2;
+         /* Custom background pattern */
+        .pattern-bg {
+            background-image: radial-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        #custom-build-contact h2 {
-            font-size: clamp(1.8rem, 4vw, 2.2rem);
-            font-weight: 700;
-            color: white;
-            margin-top: 0;
-            margin-bottom: 20px;
-            background: linear-gradient(to top, #aaa, white);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            text-fill-color: transparent; display: inline-block;
-        }
-        #custom-build-contact p {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 25px;
-        }
-        #custom-build-contact .copy-email-btn {
-            display: inline-block;
-            background-color: #4CAF50; /* Green background */
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none; /* Keep for consistency, though it's a button */
-            font-weight: 700;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            border: none; /* Button reset */
-            cursor: pointer; /* Indicate clickable */
-            position: relative; /* Needed for popup positioning */
-        }
-        #custom-build-contact .copy-email-btn:hover {
-            background-color: #388e3c; /* Darker green on hover */
-            transform: translateY(-2px);
-        }
+         /* Style for the "Copied!" popup message */
         .copy-popup {
             position: absolute;
-            bottom: calc(100% + 4px); /* Position 4px above the button */
+            bottom: calc(100% + 8px); /* Position above the button */
             left: 50%;
             transform: translateX(-50%); /* Center horizontally */
             background-color: #22c55e; /* Green background for success */
@@ -188,265 +82,221 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
             z-index: 10; /* Ensure it's above the button */
+            pointer-events: none; /* Prevent interaction */
         }
         .copy-popup.show {
             opacity: 1;
             visibility: visible;
         }
-        /* --- End Custom Build Contact Section --- */
-
-        /* --- Product Gallery Styles --- */
-        #product-gallery {
-            width: 90%;
-            max-width: 1600px;
-            margin: 0 auto 60px auto;
-            padding: 20px; position: relative; z-index: 2; text-align: center;
-        }
-        #product-gallery > h2 {
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            font-weight: 700; margin-bottom: 50px;
-            color: white; background: linear-gradient(to top, #aaa, white);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            text-fill-color: transparent; display: inline-block; padding-bottom: 8px;
-            border-bottom: 3px solid #555;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 40px;
-            text-align: left;
-        }
-        .product-card {
-            background-color: rgba(26, 26, 26, 0.8); border: 1px solid #333; border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
-            overflow: hidden; backdrop-filter: blur(3px);
-            min-height: 450px;
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(150, 150, 150, 0.2); }
-        .product-image-placeholder {
-            width: 100%;
-            height: 250px;
-            background-color: #333; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; color: #888; font-size: 1rem;
-            font-weight: 400; margin-bottom: 20px;
-            border-radius: 6px; text-align: center; border: 2px dashed #555;
-        }
-        .product-card h3 {
-            font-size: 1.7rem;
-            color: white; font-weight: 700; margin-top: 0; margin-bottom: 15px;
-        }
-        .product-card p {
-            color: #ccc;
-            font-size: 1rem;
-            line-height: 1.6;
-            flex-grow: 1; margin-bottom: 25px;
-            font-weight: 400;
-        }
-        .btn-details {
-            display: inline-block; background: linear-gradient(to right, #4CAF50, #2E7D32); color: white;
-            padding: 12px 22px;
-            text-decoration: none; border-radius: 5px; text-align: center;
-            font-size: 1rem;
-            font-weight: 700; transition: all 0.3s ease; margin-top: auto;
-            align-self: flex-start; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        .btn-details:hover { background: linear-gradient(to right, #5cb860, #388e3c); box-shadow: 0 4px 10px rgba(0,0,0,0.4); transform: translateY(-2px); }
-        /* --- End Product Gallery Styles --- */
-
-        /* --- Modal Styles --- */
-        .modal-overlay {
-            display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto;
-        }
-        .modal-content {
-            position: relative; background-color: #1c1c1c; border: 1px solid #444; border-radius: 8px;
-            padding: 30px; width: 90%; max-width: 960px; max-height: 90vh; overflow-y: auto;
-            z-index: 2001; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            opacity: 0; transform: scale(0.95); transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-overlay.active .modal-content { opacity: 1; transform: scale(1); }
-        .modal-close-btn {
-            position: absolute; top: 15px; right: 15px; background: #444; color: white; border: none;
-            border-radius: 50%; width: 30px; height: 30px; font-size: 1.2rem; line-height: 30px;
-            text-align: center; cursor: pointer; transition: background-color 0.3s ease; z-index: 2002;
-        }
-        .modal-close-btn:hover { background-color: #666; }
-        .modal-image-placeholder {
-            width: 100%; aspect-ratio: 16 / 9; max-height: 400px; background-color: #333;
-            border: 2px dashed #555; border-radius: 6px; display: flex; align-items: center; justify-content: center;
-            color: #888; font-size: 1.2rem; text-align: center; margin-bottom: 5px;
-        }
-        .modal-image-placeholder img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
-        .modal-pc-name h1 {
-            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin: 0; text-align: center; line-height: 1.2;
-            background: linear-gradient(to top, #ccc, white); -webkit-background-clip: text;
-            background-clip: text; -webkit-text-fill-color: transparent; text-fill-color: transparent; margin-bottom: 5px;
-        }
-        .modal-description p { font-size: 0.95rem; line-height: 1.6; color: #ccc; text-align: left; margin: 0; }
-        .modal-info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 600px) { .modal-info-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
-        .modal-info-section h2 { font-size: 1.2rem; font-weight: 700; color: white; margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #555; padding-bottom: 6px; }
-        .modal-info-section ul { list-style: none; padding: 0; margin: 0; color: #bbb; font-size: 0.9rem; line-height: 1.7; }
-        .modal-info-section li { margin-bottom: 8px; display: flex; justify-content: space-between; flex-wrap: wrap; border-bottom: 1px dashed #444; padding-bottom: 5px; }
-        .modal-info-section li:last-child { border-bottom: none; }
-        .modal-info-section .label { color: #fff; font-weight: 400; margin-right: 8px; flex-shrink: 0; }
-        .modal-info-section .value { color: #4CAF50; font-weight: 700; text-align: right; }
-        .modal-specs .value { color: #ddd; font-weight: 400; }
-        .modal-buy-section { text-align: center; margin-top: 10px; }
-        .modal-buy-section h2 { font-size: 1.3rem; font-weight: 700; color: white; margin-top: 0; margin-bottom: 20px; }
-        .modal-buy-links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .modal-buy-link {
-            display: inline-block; padding: 10px 20px; border-radius: 5px; text-decoration: none;
-            font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease; border: none; cursor: pointer;
-        }
-        .modal-buy-link.facebook { background-color: #1877F2; color: white; }
-        .modal-buy-link.facebook:hover { background-color: #115dc1; transform: translateY(-2px); }
-        .modal-buy-link.jawa {
-            background-color: #4748be; color: white;
-         }
-         .modal-buy-link.jawa:hover {
-             background-color: #3a3ca3; transform: translateY(-2px);
-         }
-        /* --- End Modal Styles --- */
-
-         /* --- Responsive Adjustments --- */
-         @media (max-width: 1600px) { /* Adjust breakpoint for grid columns if needed */
-             #product-gallery { max-width: 1400px; } /* Scale down slightly earlier */
-             .product-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-         }
-         @media (max-width: 1200px) {
-             #product-gallery { max-width: 1100px; }
-             .product-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-         }
-         @media (max-width: 992px) {
-             .product-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } /* Adjust min size */
-             .product-card { min-height: auto; } /* Remove fixed min-height on smaller screens */
-         }
-         @media (max-width: 768px) {
-            h1 { font-size: clamp(45px, 12vw, 80px); }
-            .scene { width: 50px; height: 50px; transform: translate(10px, -50%); }
-             .cube__face { width: 50px; height: 50px; border-width: 1px; }
-            .cube__face--front  { transform: rotateY(  0deg) translateZ(25px); }
-            .cube__face--right  { transform: rotateY( 90deg) translateZ(25px); }
-            .cube__face--back   { transform: rotateY(180deg) translateZ(25px); }
-            .cube__face--left   { transform: rotateY(-90deg) translateZ(25px); }
-            .cube__face--top    { transform: rotateX( 90deg) translateZ(25px); }
-            .cube__face--bottom { transform: rotateX(-90deg) translateZ(25px); }
-             #product-gallery > h2 { font-size: clamp(2rem, 7vw, 2.8rem); } /* Adjusted clamp */
-             .product-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
-             .product-card { padding: 15px; }
-             .product-image-placeholder { height: 180px; font-size: 0.9rem;}
-             .product-card h3 { font-size: 1.4rem; } /* Adjusted size */
-             .product-card p { font-size: 0.9rem; }
-             .btn-details { padding: 9px 16px; font-size: 0.9rem; } /* Adjusted size */
-             #custom-build-contact { padding: 25px; margin-top: 40px; }
-             #custom-build-contact h2 { font-size: clamp(1.6rem, 5vw, 2rem); }
-             #custom-build-contact p { font-size: 1rem; }
-         }
-         @media (max-width: 576px) {
-             .product-grid { grid-template-columns: 1fr; }
-             .modal-info-grid { grid-template-columns: 1fr; }
-         }
-         @media (max-width: 480px) {
-             .marquee-text { font-size: 1.5rem; padding-right: 30px; }
-             #header-area { padding-top: 80px; }
-             .scene { display: none; }
-             .product-image-placeholder { height: 160px; }
-             .product-card h3 { font-size: 1.3rem; } /* Adjusted size */
-             .product-card p { font-size: 0.85rem; }
-             .btn-details { padding: 10px 18px; width: 100%; text-align: center; font-size: 0.9rem; }
-             .modal-content { padding: 20px; }
-             .modal-close-btn { top: 10px; right: 10px; }
-             .modal-pc-name h1 { font-size: 1.5rem; }
-             .modal-info-section h2 { font-size: 1.1rem; }
-             .modal-info-section ul { font-size: 0.85rem; }
-             .modal-buy-section h2 { font-size: 1.2rem; }
-             .modal-buy-link { font-size: 0.9rem; padding: 8px 16px; }
-             #custom-build-contact .copy-email-btn { padding: 10px 20px; font-size: 0.95rem;}
-         }
-
     </style>
 </head>
-<body>
+<body class="bg-[#0a0a0f] text-gray-200 antialiased">
 
-    <div class="marquee-container">
-        <span class="marquee-text">
-            LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB -- LATEST HARDWARE -- CUSTOM BUILDS -- GAMING PCS -- NVIDIA GPUs -- BENCHMARKED -- RGB --
-        </span>
-    </div>
-
-    <div id="header-area">
-        <div id="main-title">
-            <h1>cj customs</h1>
-            <div class="scene"> <div class="cube"> <div class="cube__face cube__face--front"></div> <div class="cube__face cube__face--right"></div> <div class="cube__face cube__face--back"></div> <div class="cube__face cube__face--left"></div> <div class="cube__face cube__face--top"></div> <div class="cube__face cube__face--bottom"></div> </div> </div>
+    <nav class="sticky top-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800/50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold gradient-text-indigo-violet">cj customs</a>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#product-gallery" class="text-gray-300 hover:text-white transition duration-200">Featured Builds</a>
+                <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-200">Why Choose Us</a>
+                <a href="#custom-build-contact-form" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-300 hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <section id="custom-build-contact">
-        <h2>Want a Custom Build?</h2>
-        <p>
-            Don't see exactly what you're looking for? We specialize in creating tailor-made PCs to match your specific needs, budget, and aesthetic preferences. Get in touch to discuss your dream build!
-        </p>
-        <button id="copy-email-button" class="copy-email-btn" data-email="your.email@example.com">
-            Copy Email
-        </button>
-        <span id="copy-popup" class="copy-popup">Copied!</span>
+    <section class="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden pattern-bg pt-10 pb-16"> <div class="container mx-auto px-4 z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"> <div class="text-center md:text-left">
+                    <h1 class="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter mb-5">
+                        <span class="gradient-text-main-title">cj customs</span> </h1>
+                    <p class="text-lg sm:text-xl text-gray-400 font-light max-w-md mx-auto md:mx-0">
+                        Engineered Performance. Built For You.
+                    </p>
+                </div>
+                <div id="custom-build-contact" class="bg-gray-900/70 backdrop-blur-md p-8 sm:p-10 rounded-lg border border-gray-700 text-center relative shadow-lg">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2>
+                    <p class="text-gray-300 mb-6 text-base sm:text-lg"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
+                    </p>
+                    <div class="relative inline-block">
+                        <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-base sm:text-lg" data-email="cjcustoms120@gmail.com"> Copy Email for Quote
+                        </button>
+                        <span id="copy-popup" class="copy-popup">Copied!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div id="product-gallery">
-        <h2>Featured Builds</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image-placeholder"><span>[PC Image 1 Placeholder]</span><small>(e.g., 1080p/1440p Gaming Rig)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="stealth-bomber">View Details</button>
+    <section class="bg-black/30 backdrop-blur-md py-2.5 overflow-hidden border-y border-gray-800 z-30 relative">
+        <div class="relative flex overflow-x-hidden text-indigo-300 font-medium text-xs sm:text-sm whitespace-nowrap uppercase tracking-wider">
+            <div class="marquee-text-wrapper flex">
+                <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
             </div>
-            <div class="product-card">
-                 <div class="product-image-placeholder"><span>[PC Image 2 Placeholder]</span><small>(e.g., 4K Powerhouse)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="aurora-station">View Details</button>
-            </div>
-            <div class="product-card">
-                <div class="product-image-placeholder"><span>[PC Image 3 Placeholder]</span><small>(e.g., Compact Creator PC)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="nebula-cube">View Details</button>
-            </div>
-            <div class="product-card">
-                 <div class="product-image-placeholder"><span>[PC Image 4 Placeholder]</span><small>(e.g., Entry-Level Esports)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="ignition-spark">View Details</button>
-            </div>
-            <div class="product-card">
-                <div class="product-image-placeholder"><span>[PC Image 5 Placeholder]</span><small>(e.g., White RGB Showcase)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="glacial-peak">View Details</button>
-            </div>
-            <div class="product-card">
-                <div class="product-image-placeholder"><span>[PC Image 6 Placeholder]</span><small>(e.g., Workstation Build)</small></div>
-                <h3>[PC Name Placeholder]</h3> <p>description</p> <button class="btn-details" data-pc-id="titan-forge">View Details</button>
+             <div class="marquee-text-wrapper flex absolute top-0 left-0" aria-hidden="true">
+                 <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
+                <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="details-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close-btn" aria-label="Close modal">&times;</button>
-            <div class="modal-image-placeholder"><span>[Modal PC Image Placeholder]</span></div>
-            <div class="modal-pc-name"><h1 id="modal-pc-name">[PC Name Placeholder]</h1></div>
-            <div class="modal-description"><p id="modal-description">[Detailed description placeholder...]</p></div>
-            <div class="modal-info-grid">
-                <div class="modal-specs modal-info-section">
-                    <h2>Specifications</h2>
-                    <ul id="modal-specs-list"><li><span class="label">CPU:</span> <span class="value">[CPU Placeholder]</span></li></ul>
+    <main class="container mx-auto px-4 py-16 sm:py-20 space-y-20">
+
+        <section id="product-gallery">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Featured <span class="gradient-text">Builds</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                    <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">
+                        [PC Image 1 Placeholder]
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                        <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                        <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-1">
+                            View Details
+                        </button>
+                    </div>
                 </div>
-                 <div class="modal-benchmarks modal-info-section">
-                    <h2>Benchmarks</h2>
-                    <ul id="modal-benchmarks-list"><li><span class="label">Game 1:</span> <span class="value">[FPS Placeholder] FPS</span></li></ul>
+                <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                     <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">[PC Image 2 Placeholder]</div>
+                     <div class="p-6 flex flex-col flex-grow">
+                         <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                         <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                         <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-2">View Details</button>
+                     </div>
                  </div>
-            </div>
-             <div class="modal-buy-section">
-                <h2>Where to Buy</h2>
-                <div class="modal-buy-links">
-                    <a href="#" id="modal-fb-link" class="modal-buy-link facebook" target="_blank" rel="noopener noreferrer">View on Facebook Marketplace</a>
-                    <a href="#" id="modal-jawa-link" class="modal-buy-link jawa" target="_blank" rel="noopener noreferrer">View on Jawa.gg</a>
+                 <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                     <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">[PC Image 3 Placeholder]</div>
+                     <div class="p-6 flex flex-col flex-grow">
+                         <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                         <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                         <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-3">View Details</button>
+                     </div>
+                 </div>
+                 <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                     <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">[PC Image 4 Placeholder]</div>
+                     <div class="p-6 flex flex-col flex-grow">
+                         <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                         <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                         <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-4">View Details</button>
+                     </div>
+                 </div>
+                 <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                     <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">[PC Image 5 Placeholder]</div>
+                     <div class="p-6 flex flex-col flex-grow">
+                         <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                         <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                         <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-5">View Details</button>
+                     </div>
+                 </div>
+                 <div class="product-card bg-gray-900/60 rounded-lg overflow-hidden border border-gray-700/50 shadow-md flex flex-col transition duration-300 backdrop-blur-sm card-hover-effect">
+                     <div class="product-image-placeholder h-60 bg-gray-800 flex items-center justify-center text-gray-600 italic text-sm">[PC Image 6 Placeholder]</div>
+                     <div class="p-6 flex flex-col flex-grow">
+                         <h3 class="text-xl font-semibold mb-3 text-white">[PC Name Placeholder]</h3>
+                         <p class="text-gray-400 text-sm mb-5 flex-grow">description</p>
+                         <button class="btn-details mt-auto w-full sm:w-auto text-sm btn-gradient text-white font-semibold py-2 px-5 rounded-md transition duration-200 ease-in-out transform hover:scale-105 hover:shadow-md hover:shadow-purple-500/30" data-pc-id="build-6">View Details</button>
+                     </div>
+                 </div>
+                </div>
+        </section>
+
+        <section id="why-choose-us" class="pt-10"> <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Why <span class="gradient-text-sub">Choose Us?</span></h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-cogs"></i></div>
+                     <h3 class="text-lg font-semibold mb-2 text-white">Expert Craftsmanship</h3>
+                     <p class="text-sm text-gray-400">Meticulously built by experienced hands for optimal performance and reliability.</p>
+                 </div>
+                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-microchip"></i></div>
+                     <h3 class="text-lg font-semibold mb-2 text-white">Premium Components</h3>
+                     <p class="text-sm text-gray-400">Only high-quality, trusted parts are used to ensure longevity and peak power.</p>
+                 </div>
+                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-fire"></i></div>
+                     <h3 class="text-lg font-semibold mb-2 text-white">Rigorous Testing</h3>
+                     <p class="text-sm text-gray-400">Every build undergoes extensive stress tests to guarantee stability under load.</p>
+                 </div>
+                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-headset"></i></div>
+                     <h3 class="text-lg font-semibold mb-2 text-white">Personalized Service</h3>
+                     <p class="text-sm text-gray-400">Direct communication and support throughout the build process and beyond.</p>
+                 </div>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-10 border-t border-gray-800 mt-10">
+        <p class="text-sm text-gray-500">&copy; <span id="current-year"></span> cj customs. All Rights Reserved.</p>
+    </footer>
+
+    <div id="details-modal" class="modal-overlay hidden inset-0 bg-black/80 backdrop-blur-md z-50 justify-center items-center p-4 transition-opacity duration-300 ease-in-out opacity-0">
+        <div class="modal-content bg-gray-900 border border-gray-700 rounded-lg p-6 sm:p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-xl scale-95 transition-transform duration-300 ease-in-out">
+            <button class="modal-close-btn absolute top-3 right-3 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-full w-8 h-8 flex items-center justify-center transition duration-200 z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Close modal">
+                &times; </button>
+
+            <div class="space-y-6">
+                <div class="modal-image-placeholder aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-500 italic">
+                    <span>[Modal PC Image Placeholder]</span>
+                </div>
+
+                <div class="modal-pc-name text-center">
+                    <h1 id="modal-pc-name" class="text-2xl sm:text-3xl font-bold gradient-text">[PC Name Placeholder]</h1>
+                </div>
+
+                <div class="modal-description">
+                    <p id="modal-description" class="text-gray-300 text-sm sm:text-base">[Description Placeholder]</p>
+                </div>
+
+                <div class="modal-info-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="modal-specs modal-info-section space-y-2">
+                        <h2 class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-3">Specifications</h2>
+                        <ul id="modal-specs-list" class="text-sm text-gray-300 space-y-2">
+                            <li class="flex justify-between border-b border-gray-700/50 pb-1"><span class="font-medium text-gray-100">CPU:</span> <span class="value text-gray-400">[CPU]</span></li>
+                        </ul>
+                    </div>
+                    <div class="modal-benchmarks modal-info-section space-y-2">
+                        <h2 class="text-lg font-semibold text-white border-b border-gray-700 pb-2 mb-3">Benchmarks</h2>
+                        <ul id="modal-benchmarks-list" class="text-sm text-gray-300 space-y-2">
+                           <li class="flex justify-between border-b border-gray-700/50 pb-1"><span class="font-medium text-gray-100">[Game Name]:</span> <span class="value text-purple-400 font-bold">[FPS]</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="modal-buy-section pt-5 border-t border-gray-700 text-center">
+                    <h2 class="text-lg font-semibold text-white mb-4">Where to Buy</h2>
+                    <div class="modal-buy-links flex justify-center gap-4 flex-wrap">
+                        <a href="#" id="modal-fb-link" class="modal-buy-link facebook bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-md transition duration-200 text-sm inline-flex items-center" target="_blank" rel="noopener noreferrer">
+                           Facebook Marketplace
+                        </a>
+                        <a href="#" id="modal-jawa-link" class="modal-buy-link jawa bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-md transition duration-200 text-sm inline-flex items-center" target="_blank" rel="noopener noreferrer">
+                           Jawa.gg
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -454,94 +304,72 @@
 
 
     <script>
-        // --- Modal Functionality ---
+        // --- Get DOM Elements ---
         const modalOverlay = document.getElementById('details-modal');
         const modalContent = modalOverlay.querySelector('.modal-content');
         const closeBtn = modalOverlay.querySelector('.modal-close-btn');
         const detailButtons = document.querySelectorAll('.btn-details');
-        // Updated pcData with placeholder names and descriptions
+        const copyBtn = document.getElementById('copy-email-button');
+        const copyPopup = document.getElementById('copy-popup');
+        const currentYearSpan = document.getElementById('current-year');
+
+        // --- Set Current Year in Footer ---
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- PC Data (Example - Fill with your actual data) ---
         const pcData = {
-            'stealth-bomber': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/2d2d2d/ccc?text=Stealth+Bomber',
-                description: 'description', // Updated
-                specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ],
-                benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ],
-                fbLink: '#', jawaLink: '#'
-            },
-            'aurora-station': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/4a148c/eee?text=Aurora+Station',
-                description: 'description', // Updated
-                 specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ],
-                benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ],
-                fbLink: '#', jawaLink: '#'
-            },
-            'nebula-cube': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/004d40/eee?text=Nebula+Cube',
-                description: 'description', // Updated
-                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
-            },
-            'ignition-spark': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/bf360c/eee?text=Ignition+Spark',
-                description: 'description', // Updated
-                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
-            },
-            'glacial-peak': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/e3f2fd/333?text=Glacial+Peak',
-                description: 'description', // Updated
-                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
-            },
-            'titan-forge': {
-                name: '[PC Name Placeholder]', // Updated
-                image: 'https://placehold.co/900x506/1a237e/eee?text=Titan+Forge',
-                description: 'description', // Updated
-                specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'
-            },
-         };
-        function openModal(pcId) { /* Modal opening logic from previous step... */
-            const data = pcData[pcId] || pcData['stealth-bomber']; // Fallback remains
-            modalOverlay.querySelector('#modal-pc-name').textContent = data.name; // Will now show placeholder name
-            modalOverlay.querySelector('#modal-description').textContent = data.description; // Will now show placeholder description
+            'build-1': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/1e293b/475569?text=Build+1+Image', description: 'description', specs: [ { label: 'CPU', value: 'Intel Core i5-14600K' }, { label: 'GPU', value: 'NVIDIA RTX 4070' }, { label: 'RAM', value: '32GB DDR5 6000MHz' }, { label: 'Storage', value: '1TB NVMe SSD' }, { label: 'Case', value: 'Mid-Tower ATX Black' } ], benchmarks: [ { label: 'Cyberpunk 2077 (1440p, High)', value: '85 FPS' }, { label: 'Warzone (1440p, Competitive)', value: '150 FPS' } ], fbLink: '#', jawaLink: '#' },
+            'build-2': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/0f172a/94a3b8?text=Build+2+Image', description: 'description', specs: [ { label: 'CPU', value: 'AMD Ryzen 9 7950X' }, { label: 'GPU', value: 'NVIDIA RTX 4090' }, { label: 'RAM', value: '64GB DDR5 6400MHz' }, { label: 'Storage', value: '4TB NVMe Gen4 SSD' }, { label: 'Cooling', value: '360mm AIO Cooler' } ], benchmarks: [ { label: 'Cyberpunk 2077 (4K, Ultra RT)', value: '70 FPS' }, { label: '3DMark Time Spy Extreme', value: '19500 (GPU)' } ], fbLink: '#', jawaLink: '#' },
+            'build-3': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/164e63/9ca3af?text=Build+3+Image', description: 'description', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'build-4': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/311b92/d1c4e9?text=Build+4+Image', description: 'description', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'build-5': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/1e3a8a/93c5fd?text=Build+5+Image', description: 'description', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+            'build-6': { name: '[PC Name Placeholder]', image: 'https://placehold.co/900x506/064e3b/6ee7b7?text=Build+6+Image', description: 'description', specs: [], benchmarks: [], fbLink:'#', jawaLink:'#'},
+        };
+
+        // --- Modal Logic ---
+        function openModal(pcId) {
+            const data = pcData[pcId] || pcData['build-1']; // Fallback
+            modalOverlay.querySelector('#modal-pc-name').textContent = data.name;
+            modalOverlay.querySelector('#modal-description').textContent = data.description;
             const imgPlaceholder = modalOverlay.querySelector('.modal-image-placeholder');
             const existingImg = imgPlaceholder.querySelector('img');
             if (existingImg) existingImg.remove();
-            if (data.image) { const img = document.createElement('img'); img.src = data.image; img.alt = data.name; img.onerror = () => { imgPlaceholder.innerHTML = `<span>[Image not found for ${data.name}]</span>`; }; imgPlaceholder.innerHTML = ''; imgPlaceholder.appendChild(img); } else { imgPlaceholder.innerHTML = `<span>[Image Placeholder for ${data.name}]</span>`; }
+            imgPlaceholder.innerHTML = '';
+            if (data.image) { const img = document.createElement('img'); img.src = data.image; img.alt = data.name; img.className = 'w-full h-full object-cover rounded-md'; img.onerror = () => { imgPlaceholder.innerHTML = `<span>[Image not found]</span>`; }; imgPlaceholder.appendChild(img); } else { imgPlaceholder.innerHTML = `<span>[Image Placeholder]</span>`; }
             const specsList = modalOverlay.querySelector('#modal-specs-list');
-            specsList.innerHTML = ''; data.specs.forEach(spec => { const li = document.createElement('li'); li.innerHTML = `<span class="label">${spec.label}:</span> <span class="value">${spec.value}</span>`; specsList.appendChild(li); }); if (data.specs.length === 0) specsList.innerHTML = '<li>Specifications not available.</li>';
+            specsList.innerHTML = ''; if (data.specs.length > 0) { data.specs.forEach(spec => { const li = document.createElement('li'); li.className = 'flex justify-between border-b border-gray-700/50 pb-1'; li.innerHTML = `<span class="font-medium text-gray-100">${spec.label}:</span> <span class="value text-gray-400">${spec.value}</span>`; specsList.appendChild(li); }); } else { specsList.innerHTML = '<li>Details not available.</li>'; }
             const benchmarksList = modalOverlay.querySelector('#modal-benchmarks-list');
-            benchmarksList.innerHTML = ''; data.benchmarks.forEach(bench => { const li = document.createElement('li'); li.innerHTML = `<span class="label">${bench.label}:</span> <span class="value">${bench.value}</span>`; benchmarksList.appendChild(li); }); if (data.benchmarks.length === 0) benchmarksList.innerHTML = '<li>Benchmark data not available.</li>';
+            benchmarksList.innerHTML = ''; if (data.benchmarks.length > 0) { data.benchmarks.forEach(bench => { const li = document.createElement('li'); li.className = 'flex justify-between border-b border-gray-700/50 pb-1'; li.innerHTML = `<span class="font-medium text-gray-100">${bench.label}:</span> <span class="value text-violet-400 font-bold">${bench.value}</span>`; benchmarksList.appendChild(li); }); } else { benchmarksList.innerHTML = '<li>Benchmark data not available.</li>'; }
             modalOverlay.querySelector('#modal-fb-link').href = data.fbLink || '#'; modalOverlay.querySelector('#modal-jawa-link').href = data.jawaLink || '#';
-            modalOverlay.classList.add('active'); document.body.classList.add('modal-open');
-         }
-        function closeModal() { /* Modal closing logic from previous step... */
-            modalOverlay.classList.remove('active'); document.body.classList.remove('modal-open');
-         }
+            document.body.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + 'px');
+            document.body.classList.add('modal-open');
+            modalOverlay.classList.remove('hidden');
+            requestAnimationFrame(() => { modalOverlay.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); modalOverlay.classList.add('opacity-100'); modalContent.classList.add('scale-100'); });
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('opacity-100'); modalContent.classList.remove('scale-100');
+            modalOverlay.classList.add('opacity-0'); modalContent.classList.add('scale-95');
+            setTimeout(() => { modalOverlay.classList.add('hidden'); document.body.classList.remove('modal-open'); document.body.style.removeProperty('--scrollbar-width'); }, 300);
+        }
         detailButtons.forEach(button => { button.addEventListener('click', () => { const pcId = button.getAttribute('data-pc-id'); openModal(pcId); }); });
         closeBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (event) => { if (event.target === modalOverlay) { closeModal(); } });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modalOverlay.classList.contains('active')) { closeModal(); } });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modalOverlay.classList.contains('hidden')) { closeModal(); } });
 
-        // --- Email Copy Functionality ---
-        const copyBtn = document.getElementById('copy-email-button');
-        const copyPopup = document.getElementById('copy-popup');
-
+        // --- Email Copy Logic ---
         copyBtn.addEventListener('click', () => {
             const email = copyBtn.getAttribute('data-email');
             navigator.clipboard.writeText(email).then(() => {
-                copyPopup.classList.add('show');
-                setTimeout(() => { copyPopup.classList.remove('show'); }, 2000);
+                copyPopup.classList.add('opacity-100', 'visible'); copyPopup.classList.remove('opacity-0', 'invisible');
+                setTimeout(() => { copyPopup.classList.remove('opacity-100', 'visible'); copyPopup.classList.add('opacity-0', 'invisible'); }, 2000);
             }).catch(err => {
                 console.error('Failed to copy email: ', err);
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Error Copying!';
+                const originalText = copyBtn.textContent; copyBtn.textContent = 'Error Copying!';
                 setTimeout(() => { copyBtn.textContent = originalText; }, 2000);
             });
         });
-
     </script>
 
 </body>
