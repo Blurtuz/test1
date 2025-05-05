@@ -22,9 +22,17 @@
         .modal-content::-webkit-scrollbar-thumb { background-color: #4f46e5; border-radius: 10px; } /* indigo-600 */
         .modal-content { scrollbar-width: thin; scrollbar-color: #4f46e5 #1f2937; }
 
-        /* Marquee Animation */
-        .marquee-text-wrapper { animation: marquee 90s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+        /* Marquee Animation - Updated for single span */
+        .marquee-text {
+            display: inline-block; /* Allow transform */
+            white-space: nowrap; /* Keep text on one line */
+            padding-right: 50px; /* Space between repetitions */
+            animation: marquee 90s linear infinite;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0%); }
+            100% { transform: translateX(-50%); } /* Move half the total width */
+        }
 
         /* Modal overlay fixed position and centering */
         .modal-overlay {
@@ -130,7 +138,7 @@
 
     <section class="bg-black/30 backdrop-blur-md py-2.5 overflow-hidden border-y border-gray-800 z-30 relative">
         <div class="relative flex overflow-x-hidden text-indigo-300 font-medium text-xs sm:text-sm whitespace-nowrap uppercase tracking-wider">
-            <div class="marquee-text-wrapper flex">
+            <span class="marquee-text">
                 <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
@@ -143,21 +151,13 @@
                 <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
-            </div>
-             <div class="marquee-text-wrapper flex absolute top-0 left-0" aria-hidden="true">
                  <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
                 <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">Precision Builds</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">Peak Performance</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">Expert Benchmarking</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">NVIDIA & AMD</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">Custom Aesthetics</span><span class="text-indigo-500 mx-2">//</span>
-                <span class="mx-5">Liquid Cooling</span><span class="text-indigo-500 mx-2">//</span>
-            </div>
+            </span>
         </div>
     </section>
 
@@ -373,3 +373,4 @@
 
 </body>
 </html>
+
