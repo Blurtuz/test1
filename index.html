@@ -63,15 +63,17 @@
              background-image: linear-gradient(to right, #4f46e5, #7c3aed); /* indigo-600 to purple-600 */
         }
 
-        /* Subtle glow effect on hover for cards */
+        /* Subtle glow effect on hover for cards - Increased Intensity */
         .card-hover-effect:hover {
             border-color: #6366f1; /* indigo-500 */
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+            /* Increased spread and opacity */
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.35);
             transform: translateY(-4px); /* Slight lift */
         }
-         /* Custom background pattern */
+         /* Custom background pattern - Increased Visibility */
         .pattern-bg {
-            background-image: radial-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+            /* Increased opacity from 0.1 to 0.15 */
+            background-image: radial-gradient(rgba(124, 58, 237, 0.15) 1px, transparent 1px);
             background-size: 20px 20px;
         }
          /* Style for the "Copied!" popup message */
@@ -96,20 +98,24 @@
             opacity: 1;
             visibility: visible;
         }
+        /* Glow effect for contact section */
+        #custom-build-contact {
+             box-shadow: 0 0 40px rgba(99, 102, 241, 0.2); /* Added subtle indigo glow */
+        }
+
     </style>
 </head>
 <body class="bg-[#0a0a0f] text-gray-200 antialiased">
 
     <nav class="sticky top-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800/50">
-        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="px-4 h-16 flex items-center justify-between">
+             <a href="#" class="text-2xl font-bold gradient-text">cj customs</a>
              <div class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#product-gallery" class="text-gray-300 hover:text-white transition duration-200">Featured Builds</a>
                 <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-200">Why Choose Us</a>
                 <a href="#custom-build-contact" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a>
             </div>
-            <a href="#" class="text-2xl font-bold gradient-text">cj customs</a>
-            <div class="md:hidden">
-                 <button class="text-gray-300 hover:text-white focus:outline-none">
+            <div class="md:hidden"> <button class="text-gray-300 hover:text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
@@ -120,18 +126,18 @@
         <div class="container mx-auto px-4 z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
                 <div class="text-center md:text-left">
-                     <h1 class="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter mb-5">
+                     <h1 class="text-8xl sm:text-9xl lg:text-[10rem] font-black tracking-tighter mb-5 leading-none">
                         <span class="gradient-text">cj customs</span> </h1>
                     <p class="text-lg sm:text-xl text-gray-400 font-light max-w-md mx-auto md:mx-0">
                         Engineered Performance. Built For You.
                     </p>
                 </div>
-                <div id="custom-build-contact" class="bg-gray-900/70 backdrop-blur-md p-8 sm:p-10 rounded-lg border border-gray-700 text-center relative shadow-lg">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2>
-                    <p class="text-gray-300 mb-6 text-base sm:text-lg"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
+                <div id="custom-build-contact" class="bg-gray-900/70 backdrop-blur-md p-10 sm:p-12 rounded-lg border border-gray-700 text-center relative shadow-lg">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-5 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2>
+                    <p class="text-gray-300 mb-8 text-lg sm:text-xl"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
                     </p>
                     <div class="relative inline-block">
-                        <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-base sm:text-lg" data-email="cjcustoms120@gmail.com"> Copy Email for Quote
+                        <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3.5 px-10 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-lg sm:text-xl" data-email="cjcustoms120@gmail.com"> Copy Email for Quote
                         </button>
                         <span id="copy-popup" class="copy-popup">Copied!</span>
                     </div>
