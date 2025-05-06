@@ -10,11 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Base styling */
+        /* Base styling - Directly applying dark theme */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0f; /* Very dark base */
-            color: #d1d5db; /* gray-300 */
+            background-color: #060606; /* User specified dark background */
+            color: #d1d5db; /* gray-300 for light text on dark background */
         }
         /* Custom scrollbar for modal */
         .modal-content::-webkit-scrollbar { width: 6px; }
@@ -22,34 +22,32 @@
         .modal-content::-webkit-scrollbar-thumb { background-color: #4f46e5; border-radius: 10px; } /* indigo-600 */
         .modal-content { scrollbar-width: thin; scrollbar-color: #4f46e5 #1f2937; }
 
-        /* Marquee Animation - Updated for single span */
+        /* Marquee Animation */
         .marquee-text {
-            display: inline-block; /* Allow transform */
-            white-space: nowrap; /* Keep text on one line */
-            padding-right: 50px; /* Space between repetitions */
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 50px;
             animation: marquee 90s linear infinite;
         }
         @keyframes marquee {
             0%   { transform: translateX(0%); }
-            100% { transform: translateX(-50%); } /* Move half the total width */
+            100% { transform: translateX(-50%); }
         }
 
         /* Modal overlay fixed position and centering */
         .modal-overlay {
             position: fixed;
-            display: flex; /* Use flex for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         /* Prevent layout shift when scrollbar disappears */
         body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); }
 
-        /* Gradient text helper - Main Title (Purple/Indigo) */
+        /* Gradient text helpers */
         .gradient-text {
              background-image: linear-gradient(to right, #8b5cf6, #6366f1); /* purple-500 to indigo-500 */
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
          .gradient-text-sub {
             background-image: linear-gradient(to right, #6366f1, #a78bfa); /* indigo-500 to violet-400 */
@@ -63,57 +61,63 @@
              background-image: linear-gradient(to right, #4f46e5, #7c3aed); /* indigo-600 to purple-600 */
         }
 
-        /* Subtle glow effect on hover for cards - Increased Intensity */
+        /* Card hover effect */
         .card-hover-effect:hover {
             border-color: #6366f1; /* indigo-500 */
-            /* Increased spread and opacity */
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.35);
-            transform: translateY(-4px); /* Slight lift */
+            transform: translateY(-4px);
         }
          /* Custom background pattern - Increased Visibility */
         .pattern-bg {
-            /* Increased opacity from 0.1 to 0.15 */
-            background-image: radial-gradient(rgba(124, 58, 237, 0.15) 1px, transparent 1px);
-            background-size: 20px 20px;
+            /* Increased opacity from 0.15 to 0.2 for more visibility */
+            background-image: radial-gradient(rgba(124, 58, 237, 0.2) 1px, transparent 1px);
+            background-size: 25px 25px; /* Slightly larger dots */
         }
-         /* Style for the "Copied!" popup message */
+         /* Style for the "Copied!" popup message - Changed to purple */
         .copy-popup {
             position: absolute;
-            bottom: calc(100% + 8px); /* Position above the button */
+            bottom: calc(100% + 8px);
             left: 50%;
-            transform: translateX(-50%); /* Center horizontally */
-            background-color: #22c55e; /* Green background for success */
+            transform: translateX(-50%);
+            background-color: #7c3aed; /* purple-600 */
             color: white;
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 0.85rem;
             white-space: nowrap;
-            opacity: 0; /* Hidden by default */
+            opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 10; /* Ensure it's above the button */
-            pointer-events: none; /* Prevent interaction */
+            z-index: 10;
+            pointer-events: none;
         }
         .copy-popup.show {
             opacity: 1;
             visibility: visible;
         }
         /* Glow effect for contact section */
-        #custom-build-contact-box { /* Changed ID selector */
-             box-shadow: 0 0 40px rgba(99, 102, 241, 0.2); /* Added subtle indigo glow */
+        #custom-build-contact-box {
+             box-shadow: 0 0 40px rgba(99, 102, 241, 0.25); /* Slightly increased glow */
+        }
+        /* Why Choose Us Icon Hover */
+        .why-choose-us-card .icon-container i {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .why-choose-us-card:hover .icon-container i {
+            transform: scale(1.15);
+            color: #a78bfa; /* violet-400 */
         }
 
     </style>
 </head>
-<body class="bg-[#0a0a0f] text-gray-200 antialiased">
-
-    <nav class="sticky top-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800/50">
+<body class="antialiased"> <nav class="sticky top-0 z-50 bg-black/60 backdrop-blur-lg border-b border-gray-800/50">
         <div class="px-4 h-16 flex items-center justify-between">
              <a href="#" class="text-2xl font-bold gradient-text">cj customs</a>
              <div class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#product-gallery" class="text-gray-300 hover:text-white transition duration-200">Featured Builds</a>
                 <a href="#why-choose-us" class="text-gray-300 hover:text-white transition duration-200">Why Choose Us</a>
-                <a href="#custom-build-contact-box" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a> </div>
+                <a href="#custom-build-contact-box" class="text-gray-300 hover:text-white transition duration-200">Custom Quote</a>
+            </div>
             <div class="md:hidden"> <button class="text-gray-300 hover:text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
@@ -121,18 +125,19 @@
         </div>
     </nav>
 
-    <section class="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden pattern-bg pt-10 pb-16 px-4 sm:px-6 lg:px-8">
+    <section class="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden pattern-bg pt-10 pb-16 px-4 sm:px-6 lg:px-8 border-b border-gray-800/50">
         <div class="container mx-auto z-10">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16 items-center">
                 <div class="text-center md:text-left md:col-span-3">
-                     <h1 class="text-[6rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] xl:text-[11rem] font-black tracking-tighter mb-5 leading-none">
-                        <span class="gradient-text">cj customs</span>
+                    <h1 class="text-[6rem] sm:text-[7rem] md:text-[8rem] lg:text-[9rem] xl:text-[11rem] font-black tracking-tighter mb-5 leading-none">
+                        <span class="gradient-text pr-1">cj customs</span>
                     </h1>
                     <p class="text-lg sm:text-xl text-gray-400 font-light max-w-md mx-auto md:mx-0">
                         Engineered Performance. Built For You.
                     </p>
                 </div>
-                <div id="custom-build-contact-box" class="md:col-span-2 bg-gray-900/70 backdrop-blur-md p-8 sm:p-10 rounded-lg border border-gray-700 text-center relative shadow-lg"> <h2 class="text-3xl sm:text-4xl font-bold mb-5 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2> <p class="text-gray-300 mb-8 text-lg sm:text-xl"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
+                <div id="custom-build-contact-box" class="md:col-span-2 bg-gray-900/70 backdrop-blur-md p-8 sm:p-10 rounded-lg border border-gray-700 text-center relative shadow-lg">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-5 text-white">Ready for Your <span class="gradient-text-sub">Dream Build?</span></h2> <p class="text-gray-300 mb-8 text-lg sm:text-xl"> Don't see a build that fits your needs? Select your parts or let me tailor them. Price of parts + $100 build fee.
                     </p>
                     <div class="relative inline-block">
                         <button id="copy-email-button" class="copy-email-btn btn-gradient text-white font-semibold py-3.5 px-10 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/40 text-lg sm:text-xl" data-email="cjcustoms120@gmail.com"> Copy Email for Quote
@@ -143,6 +148,8 @@
             </div>
         </div>
     </section>
+
+    <div class="h-0.5 bg-gradient-to-r from-transparent via-indigo-700/50 to-transparent my-4"></div>
 
     <section class="bg-black/30 backdrop-blur-md py-2.5 overflow-hidden border-y border-gray-800 z-30 relative">
         <div class="relative flex overflow-x-hidden text-indigo-300 font-medium text-xs sm:text-sm whitespace-nowrap uppercase tracking-wider">
@@ -229,26 +236,28 @@
                 </div>
         </section>
 
+        <div class="h-0.5 bg-gradient-to-r from-transparent via-indigo-700/30 to-transparent"></div>
+
         <section id="why-choose-us" class="pt-10">
              <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Why <span class="gradient-text-sub">Choose Us?</span></h2>
              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
-                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-cogs"></i></div>
+                 <div class="why-choose-us-card bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="icon-container mb-4 text-indigo-400 text-4xl"><i class="fas fa-cogs"></i></div>
                      <h3 class="text-lg font-semibold mb-2 text-white">Expert Craftsmanship</h3>
                      <p class="text-sm text-gray-400">Meticulously built by experienced hands for optimal performance and reliability.</p>
                  </div>
-                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
-                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-microchip"></i></div>
+                 <div class="why-choose-us-card bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="icon-container mb-4 text-indigo-400 text-4xl"><i class="fas fa-microchip"></i></div>
                      <h3 class="text-lg font-semibold mb-2 text-white">Premium Components</h3>
                      <p class="text-sm text-gray-400">Only high-quality, trusted parts are used to ensure longevity and peak power.</p>
                  </div>
-                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
-                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-fire"></i></div>
+                 <div class="why-choose-us-card bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="icon-container mb-4 text-indigo-400 text-4xl"><i class="fas fa-fire"></i></div>
                      <h3 class="text-lg font-semibold mb-2 text-white">Rigorous Testing</h3>
                      <p class="text-sm text-gray-400">Every build undergoes extensive stress tests to guarantee stability under load.</p>
                  </div>
-                 <div class="bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
-                     <div class="mb-4 text-indigo-400 text-4xl"><i class="fas fa-headset"></i></div>
+                 <div class="why-choose-us-card bg-gray-900/40 p-6 rounded-lg border border-gray-700/50 text-center card-hover-effect transition duration-300">
+                     <div class="icon-container mb-4 text-indigo-400 text-4xl"><i class="fas fa-headset"></i></div>
                      <h3 class="text-lg font-semibold mb-2 text-white">Personalized Service</h3>
                      <p class="text-sm text-gray-400">Direct communication and support throughout the build process and beyond.</p>
                  </div>
@@ -258,7 +267,15 @@
     </main>
 
     <footer class="text-center py-10 border-t border-gray-800 mt-10">
-        <p class="text-sm text-gray-500">&copy; <span id="current-year"></span> cj customs. All Rights Reserved.</p>
+        <div class="container mx-auto px-4 text-gray-500">
+            <div class="mb-4 flex justify-center space-x-6">
+                 <a href="#" class="hover:text-indigo-400 transition duration-200 text-xl"><i class="fab fa-facebook"></i></a>
+                 <a href="#" class="hover:text-indigo-400 transition duration-200 text-xl"><i class="fab fa-instagram"></i></a>
+                 <a href="#" class="hover:text-indigo-400 transition duration-200 text-xl"><i class="fab fa-twitter"></i></a>
+                 <a href="#" class="hover:text-indigo-400 transition duration-200 text-xl"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-sm">&copy; <span id="current-year"></span> cj customs. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <div id="details-modal" class="modal-overlay hidden inset-0 bg-black/80 backdrop-blur-md z-50 justify-center items-center p-4 transition-opacity duration-300 ease-in-out opacity-0">
@@ -319,6 +336,7 @@
         const copyBtn = document.getElementById('copy-email-button');
         const copyPopup = document.getElementById('copy-popup');
         const currentYearSpan = document.getElementById('current-year');
+        // Removed theme toggle elements
 
         // --- Set Current Year in Footer ---
         if (currentYearSpan) {
@@ -363,7 +381,7 @@
         detailButtons.forEach(button => { button.addEventListener('click', () => { const pcId = button.getAttribute('data-pc-id'); openModal(pcId); }); });
         closeBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', (event) => { if (event.target === modalOverlay) { closeModal(); } });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modalOverlay.classList.contains('hidden')) { closeModal(); } });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modalOverlay.classList.contains('active')) { closeModal(); } });
 
         // --- Email Copy Logic ---
         copyBtn.addEventListener('click', () => {
