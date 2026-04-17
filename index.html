@@ -11,7 +11,7 @@
             background-color: #0a0a0a;
             color: #f3f4f6;
         }
-        .day-card {
+        .day-card, .meal-card {
             transition: all 0.3s ease;
         }
         .content-area {
@@ -66,7 +66,7 @@
             </nav>
 
             <!-- ========================================== -->
-            <!-- TAB 1: WORKOUT (Original exact code)         -->
+            <!-- TAB 1: WORKOUT                               -->
             <!-- ========================================== -->
             <div id="tab-workout" class="tab-pane block">
                 <!-- Workout Plan Container -->
@@ -368,7 +368,7 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- TAB 2: DIET (Temporary Template)             -->
+            <!-- TAB 2: DIET                                  -->
             <!-- ========================================== -->
             <div id="tab-diet" class="tab-pane hidden space-y-6">
                 
@@ -376,37 +376,155 @@
                     <div class="absolute top-0 right-0 p-4 opacity-10">
                         <i class="fas fa-apple-whole text-8xl text-emerald-500"></i>
                     </div>
-                    <h2 class="text-2xl font-bold text-white mb-2 relative z-10">Nutrition & Fuel <span class="text-sm font-normal text-yellow-500 ml-2 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 rounded-full">Template Mode</span></h2>
-                    <p class="text-gray-400 relative z-10 mb-6">Awaiting specific macro and meal configurations to fuel the high-intensity routine.</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
-                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Protein Goal</p>
-                            <p class="text-2xl font-black text-emerald-400">---g</p>
-                        </div>
-                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
-                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Carb Goal</p>
-                            <p class="text-2xl font-black text-emerald-400">---g</p>
-                        </div>
-                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
-                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Calorie Target</p>
-                            <p class="text-2xl font-black text-emerald-400">----</p>
-                        </div>
-                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2 relative z-10">Nutrition & Fuel</h2>
+                    <p class="text-gray-400 relative z-10 mb-8">Your structured fuel plan to support heavy strength training and high-intensity cardiovascular efficiency.</p>
 
                     <div class="space-y-4">
-                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
-                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-sun text-yellow-400 w-6"></i> Meal 1 (Breakfast / Pre-workout)</h4>
-                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+                        
+                        <!-- Breakfast -->
+                        <div class="meal-card rounded-xl border bg-yellow-900/10 border-yellow-800/30 overflow-hidden shadow-lg">
+                            <button onclick="toggleMeal('breakfast')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                                <div class="flex items-center space-x-4">
+                                    <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
+                                        <i class="fas fa-sun text-yellow-400"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-gray-100">Breakfast</h3>
+                                    </div>
+                                </div>
+                                <i id="meal-icon-breakfast" class="fas fa-chevron-down text-gray-500"></i>
+                            </button>
+                            <div id="meal-content-breakfast" class="content-area">
+                                <div class="p-5 border-t border-neutral-800 bg-neutral-900/60">
+                                    <ul class="space-y-3">
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Spinach (Cooked from Frozen)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2.3 oz</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Eggs (Cooked)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">3 large</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Whole Grain Thin Sliced Bread (100% Whole Wheat)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 slices</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Chia Seeds</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
-                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-cloud-sun text-orange-400 w-6"></i> Meal 2 (Lunch)</h4>
-                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+
+                        <!-- Lunch -->
+                        <div class="meal-card rounded-xl border bg-orange-900/10 border-orange-800/30 overflow-hidden shadow-lg">
+                            <button onclick="toggleMeal('lunch')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                                <div class="flex items-center space-x-4">
+                                    <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
+                                        <i class="fas fa-cloud-sun text-orange-400"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-gray-100">Lunch</h3>
+                                    </div>
+                                </div>
+                                <i id="meal-icon-lunch" class="fas fa-chevron-down text-gray-500"></i>
+                            </button>
+                            <div id="meal-content-lunch" class="content-area">
+                                <div class="p-5 border-t border-neutral-800 bg-neutral-900/60">
+                                    <ul class="space-y-3">
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Chicken Breast (Skinless, Cooked)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 large</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Broccoli (Cooked from Frozen)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">130 g</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Quinoa (Cooked)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 cup</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Avocado (Black Skin)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 each</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Sweet Potato (Baked, 2"x5" medium)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
-                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-moon text-blue-400 w-6"></i> Meal 3 (Dinner / Recovery)</h4>
-                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+
+                        <!-- Dinner -->
+                        <div class="meal-card rounded-xl border bg-blue-900/10 border-blue-800/30 overflow-hidden shadow-lg">
+                            <button onclick="toggleMeal('dinner')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                                <div class="flex items-center space-x-4">
+                                    <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
+                                        <i class="fas fa-moon text-blue-400"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-gray-100">Dinner</h3>
+                                    </div>
+                                </div>
+                                <i id="meal-icon-dinner" class="fas fa-chevron-down text-gray-500"></i>
+                            </button>
+                            <div id="meal-content-dinner" class="content-area">
+                                <div class="p-5 border-t border-neutral-800 bg-neutral-900/60">
+                                    <ul class="space-y-3">
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Pinto Beans (Cooked from Dried)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">90 g</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Chicken Breast (Skinless, Cooked)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 large</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Extra Virgin Olive Oil</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Sweet Potato (Baked, 2"x5" medium)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- Snacks -->
+                        <div class="meal-card rounded-xl border bg-teal-900/10 border-teal-800/30 overflow-hidden shadow-lg">
+                            <button onclick="toggleMeal('snacks')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                                <div class="flex items-center space-x-4">
+                                    <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
+                                        <i class="fas fa-leaf text-teal-400"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-gray-100">Snacks</h3>
+                                    </div>
+                                </div>
+                                <i id="meal-icon-snacks" class="fas fa-chevron-down text-gray-500"></i>
+                            </button>
+                            <div id="meal-content-snacks" class="content-area">
+                                <div class="p-5 border-t border-neutral-800 bg-neutral-900/60">
+                                    <ul class="space-y-3">
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Bananas (Raw, medium 7"-7 7/8" long)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                        </li>
+                                        <li class="flex justify-between items-center text-sm">
+                                            <span class="text-gray-300">Peanut Butter (Natural, Unsalted)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -524,9 +642,9 @@
             const icon = document.getElementById(`icon-${dayNum}`);
             const isOpen = content.classList.contains('open');
 
-            // Close all others
-            document.querySelectorAll('.content-area').forEach(el => el.classList.remove('open'));
-            document.querySelectorAll('.fa-chevron-up').forEach(el => {
+            // Close all others in workout tab
+            document.querySelectorAll('#workout-container .content-area').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('#workout-container .fa-chevron-up').forEach(el => {
                 el.classList.replace('fa-chevron-up', 'fa-chevron-down');
             });
 
@@ -534,6 +652,21 @@
             if (!isOpen) {
                 content.classList.add('open');
                 icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            }
+        }
+
+        // Accordion Logic for Diet Tab Meals
+        function toggleMeal(mealId) {
+            const content = document.getElementById(`meal-content-${mealId}`);
+            const icon = document.getElementById(`meal-icon-${mealId}`);
+            const isOpen = content.classList.contains('open');
+
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                content.classList.remove('open');
+                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
             }
         }
 
