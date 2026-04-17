@@ -3,320 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CJ Customs - Product Details (Layout 3 - Smaller)</title>
+    <title>Elite Longevity Protocol v1.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Import Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-
-        /* Body styling */
         body {
-            /* Checkered background pattern */
-            background:
-                linear-gradient(to right, #272727 1px, transparent 1px),
-                linear-gradient(to bottom, #272727 1px, transparent 1px),
-                #000; /* Fallback background color */
-            background-size: 50px 50px; /* Size of the grid squares */
-            background-attachment: fixed; /* Keep grid fixed during scroll */
+            background-color: #0a0a0a;
+            color: #f3f4f6;
+        }
+        .day-card {
+            transition: all 0.3s ease;
+        }
+        .content-area {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .content-area.open {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        /* Smooth transitions for tabs */
+        .tab-pane {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
 
-            /* Basic text and font settings */
-            color: white;
-            font-family: 'Roboto', sans-serif;
-            min-height: 100vh; /* Ensure body takes at least full viewport height */
-            font-weight: 300;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box; /* Apply box-sizing to body */
-            position: relative; /* Needed for pseudo-element positioning */
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
-        }
+    <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Universal App Header -->
+            <div class="text-center mb-8">
+                <div class="inline-block p-3 rounded-2xl bg-neutral-900 shadow-xl mb-4 border border-neutral-800">
+                    <i class="fas fa-heart-pulse text-4xl text-emerald-400"></i>
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+                    ELITE LONGEVITY <span class="text-emerald-400">v1.0</span>
+                </h1>
+                <p class="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+                    Optimized Protocol: Standalone Edition. Focused on Peak Hypertrophy, Pull-up Strength, and Cardiovascular Efficiency.
+                </p>
+            </div>
 
-         /* Apply box-sizing inheritance to all elements */
-        *, *::before, *::after {
-             box-sizing: inherit;
-        }
+            <!-- Tab Navigation -->
+            <nav class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 border-b border-neutral-800 pb-6">
+                <button id="btn-workout" onclick="switchTab('workout')" class="nav-btn px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 transition-all flex items-center shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                    <i class="fas fa-dumbbell mr-2"></i> Training
+                </button>
+                <button id="btn-diet" onclick="switchTab('diet')" class="nav-btn px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-gray-400 hover:text-gray-200 hover:bg-neutral-800 transition-all flex items-center border border-transparent">
+                    <i class="fas fa-utensils mr-2"></i> Diet
+                </button>
+                <button id="btn-routine" onclick="switchTab('routine')" class="nav-btn px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-gray-400 hover:text-gray-200 hover:bg-neutral-800 transition-all flex items-center border border-transparent">
+                    <i class="fas fa-clock mr-2"></i> Daily Routine
+                </button>
+            </nav>
 
-        /* Background gradient overlay - Fixed */
-        body::before {
-            content: '';
-            position: fixed; /* Fixed overlay */
-            inset: 0; /* Cover the entire viewport */
-            /* Gradient from opaque black at bottom, fading to transparent */
-            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, transparent 50%);
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: -1; /* Place behind potential content but above background grid */
-        }
+            <!-- ========================================== -->
+            <!-- TAB 1: WORKOUT (Original exact code)         -->
+            <!-- ========================================== -->
+            <div id="tab-workout" class="tab-pane block">
+                <!-- Workout Plan Container -->
+                <div id="workout-container" class="space-y-4">
+                    <!-- Day 1 -->
+                    <div class="day-card rounded-xl border bg-blue-900/10 border-blue-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(1)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-dumbbell text-blue-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 1: Strength & Cardiovascular Endurance</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 45-60 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-1" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-1" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="mb-6 inline-flex items-center px-3 py-1 rounded-full bg-neutral-800 text-blue-400 text-sm font-medium">
+                                    <i class="fas fa-activity mr-2"></i>Full-body resistance training
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-blue-400 text-sm uppercase">General Warmup (5 min)</h5>
+                                        <p class="text-sm text-gray-300">• Cycling, walking, etc.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-blue-400 text-sm uppercase">Dynamic Warmup (5 min)</h5>
+                                        <p class="text-sm text-gray-300">• Arm circles, leg swings, high knees, lateral lunges</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-blue-400 text-sm uppercase">Strength Training (25 min)</h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>• Pull-ups (AMRAP) 3 sets</li>
+                                            <li>• Squats (Goblet stance) 3x10-15</li>
+                                            <li>• Push-ups (Standard or weighted) 3x8-12</li>
+                                            <li>• Single arm dumbbell rows 3x10-12</li>
+                                            <li>• Kettlebell swings/Farmer's walks 3x30 sec</li>
+                                            <li>• Planks 3x20-30 sec</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-blue-400 text-sm uppercase">Stability Work (5-10 min)</h5>
+                                        <p class="text-sm text-gray-300">• Single-leg balance, bird dog, single-leg RDL, dead bug</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg text-sm text-gray-300 italic border border-blue-900/30">
+                                        <h5 class="font-semibold mb-2 text-blue-400 text-sm uppercase not-italic">Moderate Intensity (25 min)</h5>
+                                        Brisk walk, jog, cycle, or elliptical. Focus on form, then apply progressive overload.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* --- Styles for New Layout --- */
+                    <!-- Day 2 -->
+                    <div class="day-card rounded-xl border bg-orange-900/10 border-orange-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(2)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-fire text-orange-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 2: HIIT + Cardiovascular Health</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 45-60 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-2" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-2" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="mb-6 inline-flex items-center px-3 py-1 rounded-full bg-neutral-800 text-orange-400 text-sm font-medium">
+                                    HIIT + Zone 2 Steady State
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-orange-400 text-sm uppercase">HIIT Protocol (4 min total)</h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>• <strong>Work:</strong> 20 sec at 100% all-out exertion (e.g., sprinting, furious cycling, all-out rowing, fast burpees)</li>
+                                            <li>• <strong>Rest:</strong> 20-40 sec (total rest or very low intensity)</li>
+                                            <li>• <strong>Rounds:</strong> 8</li>
+                                            <li>• <strong>Modality:</strong> Bike, treadmill, or rowing ergometer</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-orange-400 text-sm uppercase">Moderate Intensity (Remainder)</h5>
+                                        <p class="text-sm text-gray-300">Keep HR at 60-70% max. You should be able to maintain a conversation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* Container for top elements like back link */
-        .top-bar {
-            width: 90%;
-            max-width: 960px; /* Reduced max width */
-            margin: 0 auto;
-            padding: 15px 0; /* Reduced padding */
-            position: relative;
-            z-index: 2;
-        }
+                    <!-- Day 3 -->
+                    <div class="day-card rounded-xl border bg-pink-900/10 border-pink-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(3)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-heart text-pink-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 3: Strength + Flexibility</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 60 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-3" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-3" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-pink-400 text-sm uppercase">Warmup & Mobility (10m)</h5>
+                                        <p class="text-sm text-gray-300">Dynamic stretching, hip/shoulder CARs, wall slides.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-pink-400 text-sm uppercase">Strength (30m)</h5>
+                                        <p class="text-sm text-gray-300">Compound movements (e.g. Deadlifts, Overhead press).</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-pink-400 text-sm uppercase">Yoga (15m)</h5>
+                                        <p class="text-sm text-gray-300">Cat-cow, cobbler’s, tree, cobra.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                        <h5 class="font-semibold mb-2 text-pink-400 text-sm uppercase">Static (5m)</h5>
+                                        <p class="text-sm text-gray-300">Full body static hold cool-down.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* Back link styling */
-        .back-link {
-             display: inline-block;
-             color: #aaa;
-             text-decoration: none;
-             font-size: 0.9rem; /* Reduced size */
-             transition: color 0.3s ease;
-        }
-        .back-link:hover {
-             color: #fff;
-        }
-        .back-link::before {
-             content: '← '; /* Add left arrow */
-        }
+                    <!-- Day 4 -->
+                    <div class="day-card rounded-xl border bg-yellow-900/10 border-yellow-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(4)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-bolt text-yellow-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 4: High-Intensity Interval Training</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 25-30 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-4" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-4" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-yellow-400 text-sm uppercase">Warmup (5-10m)</h5>
+                                        <p class="text-sm text-gray-300">Stability & Dynamic: Arm circles, leg swings, high knees, single-leg balance, bird dog.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2 border border-yellow-900/30">
+                                        <h5 class="font-semibold mb-2 text-yellow-400 text-sm uppercase">HIIT Protocol (8-10 Rounds)</h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>• <strong>Work:</strong> 60 sec high-intensity (>90% max HR)</li>
+                                            <li>• <strong>Examples:</strong> Jumping jacks, high knees, burpees, sprinting, mountain climbers</li>
+                                            <li>• <strong>Recovery:</strong> 60 sec active recovery (walk/light jog)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* Main Content Area */
-        .main-content-area {
-            width: 90%;
-            max-width: 960px; /* Reduced max width */
-            margin: 15px auto 40px auto; /* Reduced top margin, centering */
-            padding: 25px; /* Reduced padding */
-            background-color: rgba(20, 20, 20, 0.75); /* Slightly less transparent */
-            border-radius: 8px; /* Slightly smaller radius */
-            border: 1px solid #333;
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 25px; /* Reduced gap between elements inside */
-        }
+                    <!-- Day 5 -->
+                    <div class="day-card rounded-xl border bg-indigo-900/10 border-indigo-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(5)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-dumbbell text-indigo-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 5: Full-Body Strength Training</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 45-60 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-5" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-5" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-indigo-400 text-sm uppercase">Warmup (10m)</h5>
+                                        <p class="text-sm text-gray-300">General: cycling, walking. Dynamic: arm circles, leg swings, high knees, lateral lunges.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-indigo-400 text-sm uppercase">Strength Training</h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>• Pull-ups (AMRAP) 3 sets</li>
+                                            <li>• Lunges (Dumbbells or bodyweight) 3x10-12</li>
+                                            <li>• Overhead press (Standing) 3x10-12</li>
+                                            <li>• Dumbbell chest press 3x10-12</li>
+                                            <li>• Side plank hold 20-30s each side</li>
+                                            <li>• Step-ups 3x10 each leg</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* Product Image Placeholder (Now inside main content) */
-        .product-image-placeholder {
-            width: 100%;
-            aspect-ratio: 16 / 9; /* Common aspect ratio for main images */
-            max-height: 450px; /* Reduced maximum height */
-            background-color: #333;
-            border: 2px dashed #555;
-            border-radius: 6px; /* Smaller radius */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-size: 1.3rem; /* Reduced size */
-            text-align: center;
-            margin-bottom: 5px; /* Reduced space below image */
-        }
-        .product-image-placeholder img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cover the area */
-            border-radius: 6px;
-        }
+                    <!-- Day 6 -->
+                    <div class="day-card rounded-xl border bg-red-900/10 border-red-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(6)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-gauge-high text-red-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 6: HIIT (Norwegian Protocol)</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 30-40 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-6" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-6" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2">
+                                        <h5 class="font-semibold mb-2 text-red-400 text-sm uppercase">Warmup (5-10m)</h5>
+                                        <p class="text-sm text-gray-300">Stability & Dynamic: Arm circles, leg swings, high knees, single-leg balance, bird dog.</p>
+                                    </div>
+                                    <div class="bg-neutral-800/50 p-4 rounded-lg md:col-span-2 border border-red-900/30">
+                                        <h5 class="font-semibold mb-2 text-red-400 text-sm uppercase">4x4 Protocol (4 Rounds)</h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>• <strong>Work:</strong> 4 min at 85-95% max HR (e.g., fast running, steep incline, intense cycling)</li>
+                                            <li>• <strong>Recovery:</strong> 3 min at 60-70% max HR (e.g., slow jog, brisk walk)</li>
+                                            <li>• <strong>Modality:</strong> Treadmill or Indoor Bike</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* PC Name */
-        .pc-name h1 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Reduced size */
-            font-weight: 700;
-            margin: 0;
-            text-align: center;
-            line-height: 1.2;
-            background: linear-gradient(to top, #ccc, white);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-            margin-bottom: 5px; /* Reduced space below name */
-        }
+                    <!-- Day 7 -->
+                    <div class="day-card rounded-xl border bg-teal-900/10 border-teal-800/30 overflow-hidden shadow-lg">
+                        <button onclick="toggleDay(7)" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <div class="p-2 bg-neutral-800 rounded-lg shadow-inner"><i class="fas fa-wind text-teal-400"></i></div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-100">Day 7: Active Recovery</h3>
+                                    <div class="text-sm text-gray-400 mt-1"><i class="far fa-clock mr-1"></i> 35-50 minutes</div>
+                                </div>
+                            </div>
+                            <i id="icon-7" class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <div id="content-7" class="content-area">
+                            <div class="p-6 bg-neutral-900/60 border-t border-neutral-800">
+                                <div class="bg-neutral-800/50 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2 text-teal-400 text-sm uppercase">Movement & Recovery</h5>
+                                    <p class="text-sm text-gray-300 mb-2">• 20-30m gentle yoga or stretching</p>
+                                    <p class="text-sm text-gray-300">• 15-20m mindfulness meditation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        /* Description */
-        .description p {
-            font-size: 1rem; /* Reduced size */
-            line-height: 1.6; /* Adjusted line height */
-            color: #ccc;
-            text-align: left;
-            margin: 0;
-        }
+                <!-- Equipment Checklist -->
+                <div class="mt-8 bg-neutral-900 border border-neutral-800 p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="fas fa-toolbox text-emerald-400 mr-3"></i> Essential Equipment Checklist
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-200">Adjustable Dumbbells</p>
+                                <p class="text-xs text-gray-400">The core of the plan. Covers squats, rows, lunges, and presses.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-200">Pull-up Bar</p>
+                                <p class="text-xs text-gray-400">Doorway or wall-mounted. Essential for the Day 1 & 5 strength goals.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-200">Space for Cardio</p>
+                                <p class="text-xs text-gray-400">A treadmill/stationary bike is ideal, but open space for sprinting/burpees works too.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-200">Yoga Mat / Soft Surface</p>
+                                <p class="text-xs text-gray-400">For stability work, planks, and Day 7 recovery mobility.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        /* Grid for Specs and Benchmarks */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Default to 1 column */
-            gap: 25px; /* Reduced gap between specs and benchmarks */
-        }
+                <!-- Footer -->
+                <div class="mt-12 text-center">
+                    <div class="inline-block bg-neutral-900 border border-neutral-800 p-6 rounded-2xl text-left max-w-md">
+                        <h4 class="text-emerald-400 font-bold mb-2">Age 17 Optimization Notes:</h4>
+                        <ul class="text-sm text-gray-400 space-y-2">
+                            <li>• Priority: Progressive Overload on all compound lifts.</li>
+                            <li>• Pull-ups: Perform 3 sets to failure (AMRAP) on Day 1 & 5.</li>
+                            <li>• Recovery: Aim for 8-9 hours of sleep to match high intensity.</li>
+                        </ul>
+                    </div>
+                    <p class="text-xs text-neutral-600 mt-8 uppercase tracking-widest">Always prioritize form over weight.</p>
+                </div>
+            </div>
 
-        @media (min-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr 1fr; /* 2 columns side-by-side */
-                gap: 40px; /* Reduced gap */
+            <!-- ========================================== -->
+            <!-- TAB 2: DIET (Temporary Template)             -->
+            <!-- ========================================== -->
+            <div id="tab-diet" class="tab-pane hidden space-y-6">
+                
+                <div class="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-apple-whole text-8xl text-emerald-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2 relative z-10">Nutrition & Fuel <span class="text-sm font-normal text-yellow-500 ml-2 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 rounded-full">Template Mode</span></h2>
+                    <p class="text-gray-400 relative z-10 mb-6">Awaiting specific macro and meal configurations to fuel the high-intensity routine.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
+                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Protein Goal</p>
+                            <p class="text-2xl font-black text-emerald-400">---g</p>
+                        </div>
+                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
+                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Carb Goal</p>
+                            <p class="text-2xl font-black text-emerald-400">---g</p>
+                        </div>
+                        <div class="bg-neutral-800/50 p-4 rounded-xl text-center border border-neutral-700/50">
+                            <p class="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-1">Calorie Target</p>
+                            <p class="text-2xl font-black text-emerald-400">----</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-sun text-yellow-400 w-6"></i> Meal 1 (Breakfast / Pre-workout)</h4>
+                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+                        </div>
+                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-cloud-sun text-orange-400 w-6"></i> Meal 2 (Lunch)</h4>
+                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+                        </div>
+                        <div class="bg-neutral-800/30 border border-neutral-800 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-700 pb-2"><i class="fas fa-moon text-blue-400 w-6"></i> Meal 3 (Dinner / Recovery)</h4>
+                            <p class="text-sm text-gray-500 italic">Slot reserved for actual meal plan details...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- TAB 3: DAILY ROUTINE (Temporary Template)    -->
+            <!-- ========================================== -->
+            <div id="tab-routine" class="tab-pane hidden space-y-6">
+                
+                <div class="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-calendar-check text-8xl text-emerald-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2 relative z-10">Daily Protocol <span class="text-sm font-normal text-yellow-500 ml-2 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 rounded-full">Template Mode</span></h2>
+                    <p class="text-gray-400 relative z-10 mb-8">Structure your day around sleep consistency, training blocks, and recovery windows.</p>
+
+                    <div class="relative border-l-2 border-emerald-500/30 ml-4 space-y-8 pb-4">
+                        
+                        <!-- Morning Block -->
+                        <div class="relative">
+                            <div class="absolute -left-[21px] top-1 bg-neutral-900 border-2 border-emerald-500 rounded-full w-10 h-10 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                <i class="fas fa-sun text-emerald-400"></i>
+                            </div>
+                            <div class="pl-10">
+                                <h3 class="text-xl font-bold text-gray-200 mb-1">Morning Block</h3>
+                                <p class="text-sm text-emerald-400 font-semibold mb-3">00:00 AM - 00:00 AM</p>
+                                <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-lg p-4">
+                                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                                        <li>Wake up (Goal: Consistent wake time)</li>
+                                        <li>Hydration Protocol</li>
+                                        <li>[Awaiting your specific routine inputs...]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mid-Day Block -->
+                        <div class="relative">
+                            <div class="absolute -left-[21px] top-1 bg-neutral-900 border-2 border-emerald-500 rounded-full w-10 h-10 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                <i class="fas fa-bolt text-emerald-400"></i>
+                            </div>
+                            <div class="pl-10">
+                                <h3 class="text-xl font-bold text-gray-200 mb-1">Training / Afternoon Block</h3>
+                                <p class="text-sm text-emerald-400 font-semibold mb-3">00:00 PM - 00:00 PM</p>
+                                <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-lg p-4">
+                                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                                        <li>Elite Longevity Workout Session</li>
+                                        <li>Post-workout fuel</li>
+                                        <li>[Awaiting your specific routine inputs...]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Evening Block -->
+                        <div class="relative">
+                            <div class="absolute -left-[21px] top-1 bg-neutral-900 border-2 border-emerald-500 rounded-full w-10 h-10 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                <i class="fas fa-moon text-emerald-400"></i>
+                            </div>
+                            <div class="pl-10">
+                                <h3 class="text-xl font-bold text-gray-200 mb-1">Wind-Down & Recovery</h3>
+                                <p class="text-sm text-emerald-400 font-semibold mb-3">00:00 PM - 00:00 PM</p>
+                                <div class="bg-neutral-800/50 border border-neutral-700/50 rounded-lg p-4">
+                                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside">
+                                        <li>Screen shutdown protocol</li>
+                                        <li>[Awaiting your specific routine inputs...]</li>
+                                        <li>Target sleep: 8-9 hours for recovery</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-pane').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            
+            // Reset all buttons to inactive state
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('text-emerald-400', 'bg-emerald-500/10', 'border-emerald-500/30', 'shadow-[0_0_15px_rgba(16,185,129,0.1)]');
+                el.classList.add('text-gray-400', 'border-transparent');
+            });
+
+            // Show target tab
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+                targetTab.classList.add('block');
+            }
+
+            // Highlight target button
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-400', 'border-transparent');
+                activeBtn.classList.add('text-emerald-400', 'bg-emerald-500/10', 'border-emerald-500/30', 'shadow-[0_0_15px_rgba(16,185,129,0.1)]');
             }
         }
 
-        /* Section styling (shared by specs and benchmarks) */
-        .info-section {
-             /* No extra margin needed due to parent gap */
-        }
-        .info-section h2 {
-            font-size: 1.3rem; /* Reduced section titles */
-            font-weight: 700;
-            color: white;
-            margin-top: 0; /* Reset top margin */
-            margin-bottom: 15px; /* Reduced margin */
-            border-bottom: 1px solid #555; /* Slightly bolder border */
-            padding-bottom: 8px; /* Reduced padding */
-        }
-        .info-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            color: #bbb;
-            font-size: 0.95rem; /* Reduced size */
-            line-height: 1.7; /* Adjusted line height */
-        }
-        .info-section li {
-            margin-bottom: 10px; /* Reduced space between items */
-            display: flex; /* Use flex for alignment */
-            justify-content: space-between; /* Push label and value apart */
-            flex-wrap: wrap; /* Allow wrapping if needed */
-            border-bottom: 1px dashed #444; /* Subtle separator */
-            padding-bottom: 6px; /* Reduced padding */
-        }
-        .info-section li:last-child {
-            border-bottom: none; /* Remove border on last item */
+        // Accordion Logic for Workout Tab
+        function toggleDay(dayNum) {
+            const content = document.getElementById(`content-${dayNum}`);
+            const icon = document.getElementById(`icon-${dayNum}`);
+            const isOpen = content.classList.contains('open');
+
+            // Close all others
+            document.querySelectorAll('.content-area').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.fa-chevron-up').forEach(el => {
+                el.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            });
+
+            // Toggle current
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            }
         }
 
-        /* Spec/Benchmark Label */
-        .info-section .label {
-            color: #fff;
-            font-weight: 400;
-            margin-right: 10px; /* Reduced space after label */
-            flex-shrink: 0; /* Prevent label from shrinking */
-        }
-         /* Spec/Benchmark Value */
-        .info-section .value {
-            color: #4CAF50; /* Green color for results/values */
-            font-weight: 700;
-            text-align: right; /* Align value to the right */
-        }
-        /* Specific styling for spec values if needed */
-        .specs .value {
-            color: #ddd; /* Slightly different color for specs */
-            font-weight: 400;
-        }
-
-
-        /* Where to Buy Section */
-        .buy-section {
-            /* Removed background/border - now part of main content area */
-            text-align: center;
-            margin-top: 15px; /* Reduced space above */
-        }
-        .buy-section h2 {
-            font-size: 1.4rem; /* Reduced size */
-            font-weight: 700;
-            color: white;
-            margin-top: 0;
-            margin-bottom: 25px; /* Reduced margin */
-        }
-        .buy-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px; /* Reduced gap */
-            flex-wrap: wrap;
-        }
-        .buy-link {
-            display: inline-block;
-            padding: 12px 24px; /* Reduced padding */
-            border-radius: 5px; /* Smaller radius */
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem; /* Reduced size */
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        /* Specific link styles */
-        .buy-link.facebook {
-            background-color: #1877F2; /* Facebook Blue */
-            color: white;
-        }
-        .buy-link.facebook:hover {
-             background-color: #115dc1;
-             transform: translateY(-2px);
-        }
-        .buy-link.jawa {
-             /* Using Jawa's typical orange/black - adjust if needed */
-            background-color: #ff6600;
-            color: black;
-        }
-         .buy-link.jawa:hover {
-             background-color: #e65c00;
-             transform: translateY(-2px);
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="top-bar">
-        <a href="index.html" class="back-link">Back to Builds</a>
-    </div>
-
-    <div class="main-content-area">
-
-        <div class="product-image-placeholder">
-            <span>[Main PC Image Placeholder]</span>
-            </div>
-
-        <div class="pc-name">
-            <h1>[PC Name Placeholder]</h1>
-        </div>
-
-        <div class="description">
-            <p>
-                [Detailed description of the PC build goes here. Talk about its strengths, target use case (e.g., gaming, streaming, workstation), design philosophy, cooling solution, and any unique features. Make it compelling!]
-            </p>
-        </div>
-
-        <div class="info-grid">
-            <div class="specs info-section">
-                <h2>Specifications</h2>
-                <ul>
-                    <li><span class="label">CPU:</span> <span class="value">[CPU Model Placeholder]</span></li>
-                    <li><span class="label">GPU:</span> <span class="value">[GPU Model Placeholder]</span></li>
-                    <li><span class="label">RAM:</span> <span class="value">[RAM Details Placeholder]</span></li>
-                    <li><span class="label">Storage:</span> <span class="value">[Storage Details Placeholder]</span></li>
-                    <li><span class="label">Motherboard:</span> <span class="value">[Motherboard Placeholder]</span></li>
-                    <li><span class="label">PSU:</span> <span class="value">[PSU Placeholder]</span></li>
-                    <li><span class="label">Case:</span> <span class="value">[Case Model Placeholder]</span></li>
-                    <li><span class="label">Cooling:</span> <span class="value">[Cooling Solution Placeholder]</span></li>
-                    </ul>
-            </div>
-
-            <div class="benchmarks info-section">
-                <h2>Benchmarks</h2>
-                <ul>
-                    <li><span class="label">Cyberpunk 2077 (1440p, Ultra):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
-                    <li><span class="label">Call of Duty: Warzone (1440p, High):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
-                    <li><span class="label">Fortnite (1080p, Competitive):</span> <span class="value">[Avg FPS Placeholder] FPS</span></li>
-                    <li><span class="label">Cinebench R23 (Multi-Core):</span> <span class="value">[Score Placeholder]</span></li>
-                    <li><span class="label">3DMark Time Spy (GPU Score):</span> <span class="value">[Score Placeholder]</span></li>
-                    </ul>
-                <small style="color: #888; display: block; margin-top: 10px; text-align: center; font-size: 0.85rem;">(Benchmark results are indicative and may vary based on drivers, game updates, and specific settings.)</small>
-            </div>
-        </div>
-
-        <div class="buy-section">
-            <h2>Where to Buy</h2>
-            <div class="buy-links">
-                <a href="#" class="buy-link facebook" target="_blank" rel="noopener noreferrer">
-                    View on Facebook Marketplace
-                </a>
-                <a href="#" class="buy-link jawa" target="_blank" rel="noopener noreferrer">
-                    View on Jawa.gg
-                </a>
-            </div>
-        </div>
-
-    </div> </body>
+        // Initialize App: Open Day 1 of Workout Tab by default
+        window.onload = () => {
+            toggleDay(1);
+        };
+    </script>
+</body>
 </html>
