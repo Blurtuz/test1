@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +33,22 @@
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Grocery Checklist Styles */
+        .grocery-item {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .grocery-item:active {
+            transform: scale(0.98);
+        }
+        .grocery-item.checked .item-text {
+            text-decoration: line-through;
+            color: #4b5563; /* gray-600 */
+        }
+        .grocery-item.checked .item-desc {
+            color: #374151; /* gray-700 */
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -58,7 +75,7 @@
                     <i class="fas fa-dumbbell mr-2"></i> Training
                 </button>
                 <button id="btn-diet" onclick="switchTab('diet')" class="nav-btn px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-gray-400 hover:text-gray-200 hover:bg-neutral-800 transition-all flex items-center border border-transparent">
-                    <i class="fas fa-utensils mr-2"></i> Diet
+                    <i class="fas fa-utensils mr-2"></i> Diet & Groceries
                 </button>
                 <button id="btn-routine" onclick="switchTab('routine')" class="nav-btn px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-bold text-gray-400 hover:text-gray-200 hover:bg-neutral-800 transition-all flex items-center border border-transparent">
                     <i class="fas fa-clock mr-2"></i> Daily Routine
@@ -368,7 +385,7 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- TAB 2: DIET                                  -->
+            <!-- TAB 2: DIET & GROCERIES                      -->
             <!-- ========================================== -->
             <div id="tab-diet" class="tab-pane hidden space-y-6">
                 
@@ -379,10 +396,25 @@
                     <h2 class="text-2xl font-bold text-white mb-2 relative z-10">Nutrition & Fuel</h2>
                     <p class="text-gray-400 relative z-10 mb-8">Your structured fuel plan to support heavy strength training and high-intensity cardiovascular efficiency.</p>
 
-                    <div class="space-y-4">
-                        
+                    <!-- Budget Overview Grid -->
+                    <div class="grid grid-cols-2 gap-4 mb-8 relative z-10">
+                        <div class="bg-neutral-800/80 p-4 rounded-xl text-center border border-neutral-700/50 shadow-inner">
+                            <p class="text-gray-400 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-1">Week 1 Stock-Up</p>
+                            <p class="text-2xl sm:text-3xl font-black text-emerald-400">~$75</p>
+                            <p class="text-xs text-gray-500 mt-1">Includes pantry staples</p>
+                        </div>
+                        <div class="bg-neutral-800/80 p-4 rounded-xl text-center border border-neutral-700/50 shadow-inner">
+                            <p class="text-gray-400 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-1">Recurring Weekly</p>
+                            <p class="text-2xl sm:text-3xl font-black text-emerald-400">~$40</p>
+                            <p class="text-xs text-gray-500 mt-1">Perishables & restocks</p>
+                        </div>
+                    </div>
+
+                    <!-- MEAL ACCORDIONS -->
+                    <div class="space-y-4 mb-10 relative z-10">
+                        <h3 class="text-xl font-bold text-white mb-4 border-b border-neutral-800 pb-2">Daily Meal Plan</h3>
                         <!-- Breakfast -->
-                        <div class="meal-card rounded-xl border bg-yellow-900/10 border-yellow-800/30 overflow-hidden shadow-lg">
+                        <div class="meal-card rounded-xl border bg-yellow-900/10 border-yellow-800/30 overflow-hidden shadow-sm">
                             <button onclick="toggleMeal('breakfast')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
                                 <div class="flex items-center space-x-4">
                                     <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
@@ -399,19 +431,19 @@
                                     <ul class="space-y-3">
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Spinach (Cooked from Frozen)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2.3 oz</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">2.3 oz</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Eggs (Cooked)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">3 large</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">3 large</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
-                                            <span class="text-gray-300">Whole Grain Thin Sliced Bread (100% Whole Wheat)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 slices</span>
+                                            <span class="text-gray-300">Whole Grain Thin Sliced Bread</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">2 slices</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Chia Seeds</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">2 tbsp</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -419,7 +451,7 @@
                         </div>
 
                         <!-- Lunch -->
-                        <div class="meal-card rounded-xl border bg-orange-900/10 border-orange-800/30 overflow-hidden shadow-lg">
+                        <div class="meal-card rounded-xl border bg-orange-900/10 border-orange-800/30 overflow-hidden shadow-sm">
                             <button onclick="toggleMeal('lunch')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
                                 <div class="flex items-center space-x-4">
                                     <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
@@ -436,23 +468,23 @@
                                     <ul class="space-y-3">
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Chicken Breast (Skinless, Cooked)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 large</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">0.5 large</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Broccoli (Cooked from Frozen)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">130 g</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">130 g</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Quinoa (Cooked)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 cup</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">0.5 cup</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Avocado (Black Skin)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 each</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">0.5 each</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Sweet Potato (Baked, 2"x5" medium)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">1 medium</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -460,7 +492,7 @@
                         </div>
 
                         <!-- Dinner -->
-                        <div class="meal-card rounded-xl border bg-blue-900/10 border-blue-800/30 overflow-hidden shadow-lg">
+                        <div class="meal-card rounded-xl border bg-blue-900/10 border-blue-800/30 overflow-hidden shadow-sm">
                             <button onclick="toggleMeal('dinner')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
                                 <div class="flex items-center space-x-4">
                                     <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
@@ -477,19 +509,19 @@
                                     <ul class="space-y-3">
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Pinto Beans (Cooked from Dried)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">90 g</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">90 g</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Chicken Breast (Skinless, Cooked)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">0.5 large</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">0.5 large</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Extra Virgin Olive Oil</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">2 tbsp</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Sweet Potato (Baked, 2"x5" medium)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">1 medium</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -497,7 +529,7 @@
                         </div>
 
                         <!-- Snacks -->
-                        <div class="meal-card rounded-xl border bg-teal-900/10 border-teal-800/30 overflow-hidden shadow-lg">
+                        <div class="meal-card rounded-xl border bg-teal-900/10 border-teal-800/30 overflow-hidden shadow-sm">
                             <button onclick="toggleMeal('snacks')" class="w-full flex items-center justify-between p-5 text-left bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors">
                                 <div class="flex items-center space-x-4">
                                     <div class="p-2 bg-neutral-800 rounded-lg shadow-inner flex items-center justify-center w-10 h-10">
@@ -513,14 +545,147 @@
                                 <div class="p-5 border-t border-neutral-800 bg-neutral-900/60">
                                     <ul class="space-y-3">
                                         <li class="flex justify-between items-center text-sm">
-                                            <span class="text-gray-300">Bananas (Raw, medium 7"-7 7/8" long)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">1 medium</span>
+                                            <span class="text-gray-300">Bananas (Raw)</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">1 medium</span>
                                         </li>
                                         <li class="flex justify-between items-center text-sm">
                                             <span class="text-gray-300">Peanut Butter (Natural, Unsalted)</span>
-                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full">2 tbsp</span>
+                                            <span class="text-emerald-400 font-bold bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700">2 tbsp</span>
                                         </li>
                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- GROCERY CHECKLIST (Interactive) -->
+                    <div class="bg-neutral-800/40 border border-neutral-700 rounded-2xl p-4 sm:p-6 relative z-10">
+                        <div class="flex items-center justify-between mb-4 border-b border-neutral-700 pb-3">
+                            <h3 class="text-xl font-bold text-white flex items-center">
+                                <i class="fas fa-shopping-cart text-emerald-400 mr-3"></i> Weekly Grocery List
+                            </h3>
+                            <button onclick="resetGroceries()" class="text-xs text-gray-500 hover:text-emerald-400 transition-colors">
+                                <i class="fas fa-rotate-left mr-1"></i> Reset
+                            </button>
+                        </div>
+                        
+                        <p class="text-xs text-gray-400 mb-6 italic">Tap items to cross them off at the store.</p>
+
+                        <!-- Produce -->
+                        <div class="mb-6">
+                            <h4 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-3">🥬 Produce</h4>
+                            <div class="space-y-2">
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Sweet Potatoes</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">14 medium (or approx 4-5 lbs bag)</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Avocados</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">4 whole avocados</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Bananas</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">1 large bunch (7 bananas)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Meat & Dairy -->
+                        <div class="mb-6">
+                            <h4 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-3">🍗 Meat & Dairy</h4>
+                            <div class="space-y-2">
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Eggs</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">2 Dozen (24 count pack)</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Chicken Breast (Skinless)</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">1 Family Pack (approx 3.5 - 4 lbs)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Frozen -->
+                        <div class="mb-6">
+                            <h4 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-3">❄️ Frozen</h4>
+                            <div class="space-y-2">
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Frozen Spinach</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 16 oz bag</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Frozen Broccoli</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 32 oz family bag (or two 16 oz bags)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pantry -->
+                        <div class="mb-2">
+                            <h4 class="text-sm font-bold text-emerald-500 uppercase tracking-wider mb-3">🥫 Pantry / Dry Goods</h4>
+                            <div class="space-y-2">
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Whole Grain Thin Sliced Bread</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">1 loaf (e.g., Pepperidge Farm)</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Dry Pinto Beans</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 2 lb bag</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Quinoa</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 16 oz bag</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Chia Seeds</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 12-16 oz bag</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Natural Peanut Butter (Unsalted)</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 16 oz jar</p>
+                                    </div>
+                                </div>
+                                <div class="grocery-item flex items-start bg-neutral-900/50 p-3 rounded-lg border border-neutral-800 hover:border-neutral-700" onclick="toggleCheck(this)">
+                                    <i class="check-icon far fa-circle text-gray-500 mt-0.5 mr-3 text-lg transition-colors"></i>
+                                    <div>
+                                        <p class="item-text font-semibold text-gray-300 transition-colors">Extra Virgin Olive Oil</p>
+                                        <p class="item-desc text-xs text-gray-500 transition-colors">One 16.9 oz (500ml) bottle</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -670,6 +835,34 @@
             }
         }
 
+        // Grocery List Checkbox Logic
+        function toggleCheck(element) {
+            const icon = element.querySelector('.check-icon');
+            
+            // Toggle checked class on the parent div
+            element.classList.toggle('checked');
+            
+            // Toggle FontAwesome icons and colors
+            if (element.classList.contains('checked')) {
+                icon.classList.replace('far', 'fas');
+                icon.classList.replace('fa-circle', 'fa-check-circle');
+                icon.classList.replace('text-gray-500', 'text-emerald-500');
+            } else {
+                icon.classList.replace('fas', 'far');
+                icon.classList.replace('fa-check-circle', 'fa-circle');
+                icon.classList.replace('text-emerald-500', 'text-gray-500');
+            }
+        }
+
+        // Reset all groceries
+        function resetGroceries() {
+            document.querySelectorAll('.grocery-item').forEach(el => {
+                if(el.classList.contains('checked')) {
+                    toggleCheck(el); // Untoggle them
+                }
+            });
+        }
+
         // Initialize App: Open Day 1 of Workout Tab by default
         window.onload = () => {
             toggleDay(1);
@@ -677,3 +870,6 @@
     </script>
 </body>
 </html>
+
+
+```
